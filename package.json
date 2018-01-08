@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "gravatar-url": "^2.0.0",
+    "moment": "^2.20.1",
+    "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
     "qs": "^6.5.1",
     "react": "^16.2.0",
@@ -37,5 +39,5 @@
     "eslint-plugin-react": "^7.5.1",
     "prettier": "^1.9.2"
   },
-  "proxy": "http://127.0.0.1/CAPI"
+  "proxy": "http://127.0.0.1/CAPI_J"
 }
