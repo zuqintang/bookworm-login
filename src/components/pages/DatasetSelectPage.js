@@ -24,7 +24,7 @@ class DatasetSelectPage extends React.Component {
     let i = param.offset;
     console.log(i);
     const total = data[1].length > 10 ? 10 : data[1].length;
-    for (; i < i + total; ) {
+    for (; i < 10; ) {
       rows.push(data[0].sets[data[1][(i += 1)]]);
     }
     console.log(rows);

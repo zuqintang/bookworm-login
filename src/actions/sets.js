@@ -14,9 +14,9 @@ const setCreated = data => ({
   data
 });
 
-export const fetchSets = () => dispatch =>
+export const fetchSets = param => dispatch =>
   api.sets
-    .fetchAll()
+    .fetchAll(param)
     .then(sets => dispatch(setsFetched(normalize(sets, [setSchema]))));
 
 export const createSet = data => dispatch =>

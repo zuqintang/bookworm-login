@@ -36,9 +36,9 @@ export default {
         .then(res => res.data)
   },
   sets: {
-    fetchAll: () =>
+    fetchAll: param =>
       axios
-        .post("/Dataset/search?standard=0&stduy=0&limit=-1&offset=-1&keyword=")
+        .post("/Dataset/search", qs.stringify(param))
         .then(res => res.data.rows),
     create: sets => axios.post("/api/books", sets).then(res => res.data.rows)
   }

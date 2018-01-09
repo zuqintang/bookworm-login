@@ -5,19 +5,36 @@ import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 import { allSetsSelector } from "../../reducers/sets";
 import AddSetCtA from "../ctas/AddSetCtA";
 import { fetchSets } from "../../actions/sets";
-import DatasetSelectPage from "../pages/DatasetSelectPage";
+import DatasetTable from "../tabels/DatasetTable";
 
 class DashboardPage extends React.Component {
+  state = {
+    param: {
+      standard: -1,
+      study: -1,
+      limit: 10,
+      offset: 0,
+      keyword: ""
+    }
+  };
   componentDidMount = () => this.onInit(this.props);
-  onInit = props => props.fetchSets();
+  onInit = props => props.fetchSets(this.state.param);
+  submit = param => this.props.fetchSets(param);
   render() {
     const { isConfirmed, sets } = this.props;
-    console.log(sets[0]);
-    if (sets.length !== 0) console.log(sets[0].sets);
+    const total = Math.ceil(sets.length / 10);
+    const data = {};
+    data.total = total;
+    data.rows = sets;
+    const { param } = this.state;
     return (
       <div>
         {isConfirmed && <ConfirmEmailMessage />}
-        {sets.length === 0 ? <AddSetCtA /> : <DatasetSelectPage data={sets} />}
+        {sets.length === 0 ? (
+          <AddSetCtA />
+        ) : (
+          <DatasetTable data={data} submit={this.submit} param={param} />
+        )}
       </div>
     );
   }
@@ -25,8 +42,11 @@ class DashboardPage extends React.Component {
 
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
-  fetchSets: PropTypes.func.isRequired,
-  sets: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  sets: PropTypes.arrayOf(
+    PropTypes.shape({
+      ID: PropTypes.number.isRequired
+    }).isRequired
+  ).isRequired
 };
 
 function mapStateToProps(state) {
