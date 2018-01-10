@@ -1,20 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Table, Dimmer, Loader, Grid, Label } from "semantic-ui-react";
+import { Table, Dimmer, Loader, Grid } from "semantic-ui-react";
 import SetRows from "../rows/SetRows";
 import Paginator from "../tools/Paginator";
-import DatasetTool from "../tools/DatasetTool";
 
 class DatasetTable extends React.Component {
-  state = { activeRow: 0, loading: false };
-  getActiveRow = () => {
-    const activeRowID = this.state.activeRow;
-    return activeRowID;
-  };
+  state = {};
   handleRowClick = e => {
     const activeRowID = parseInt(e.target.name, 10);
-    if (this.state.activeRow === activeRowID) this.setState({ activeRow: 0 });
-    else this.setState({ activeRow: activeRowID });
+    if (this.props.getActiveRow() === activeRowID) this.props.setActiveRow(0);
+    else this.props.setActiveRow(activeRowID);
   };
   search = searchParam => {
     this.setState({ active: true });
@@ -22,15 +17,15 @@ class DatasetTable extends React.Component {
   };
 
   render() {
-    const { active, activeRow } = this.state;
+    const { active } = this.state;
     const { data, param } = this.props;
     return (
       <Dimmer.Dimmable>
         <Dimmer active={active} inverted onClickOutside={this.handleHide}>
           <Loader />
         </Dimmer>
-        <Grid width={16}>
-          <Grid.Column width={15}>
+        <Grid>
+          <Grid.Column>
             <Table celled selectable stackable compact="very">
               <Table.Header>
                 <Table.Row>
@@ -45,9 +40,8 @@ class DatasetTable extends React.Component {
               <Table.Body>
                 <SetRows
                   setData={data.rows}
-                  activeRow={activeRow}
                   handleRowClick={this.handleRowClick}
-                  getActiveRow={this.getActiveRow}
+                  getActiveRow={this.props.getActiveRow}
                 />
               </Table.Body>
               <Table.Footer>
@@ -63,12 +57,6 @@ class DatasetTable extends React.Component {
               </Table.Footer>
             </Table>
           </Grid.Column>
-          <Grid.Column width={1}>
-            <Label as="a" color="teal" ribbon>
-              操作面板
-            </Label>
-            <DatasetTool getActiveRow={this.getActiveRow} />
-          </Grid.Column>
         </Grid>
       </Dimmer.Dimmable>
     );
@@ -77,6 +65,8 @@ class DatasetTable extends React.Component {
 
 DatasetTable.propTypes = {
   submit: PropTypes.func.isRequired,
+  getActiveRow: PropTypes.func.isRequired,
+  setActiveRow: PropTypes.func.isRequired,
   data: PropTypes.shape({
     total: PropTypes.number.isRequired,
     rows: PropTypes.array.isRequired

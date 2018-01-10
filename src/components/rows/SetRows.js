@@ -5,7 +5,7 @@ import { FormatStandard, FormatStudy } from "../tools/Formater";
 
 function SetRows(props) {
   const rows = props.setData;
-  const activeRow = props.activeRow;
+  const activeRow = props.getActiveRow();
   const getActiveRow = props.getActiveRow;
   const SetRowsList = rows.map(row => (
     <Table.Row key={row.ID}>

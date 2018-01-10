@@ -9,6 +9,7 @@ import { search } from "../../actions/dataset";
 class DatasetPage extends React.Component {
   state = {
     data: { rows: [], total: 0 },
+    activeRow: 0,
     param: {
       standard: -1,
       study: -1,
@@ -18,6 +19,8 @@ class DatasetPage extends React.Component {
     }
   };
   setParam = param => this.setState({ param });
+  setActiveRow = activeRow => this.setState({ activeRow });
+  getActiveRow = () => this.state.activeRow;
   submit = param =>
     this.props.search(param).then(res => this.setState({ data: res }));
   handleContextRef = contextRef => this.setState({ contextRef });
@@ -38,6 +41,8 @@ class DatasetPage extends React.Component {
               data={this.state.data}
               submit={this.submit}
               param={param}
+              setActiveRow={this.setActiveRow}
+              getActiveRow={this.getActiveRow}
             />
           </Grid.Column>
         </Grid.Row>

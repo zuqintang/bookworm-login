@@ -36,10 +36,8 @@ export default {
         .then(res => res.data)
   },
   sets: {
-    fetchAll: param =>
-      axios
-        .post("/Dataset/search", qs.stringify(param))
-        .then(res => res.data.rows),
+    fetchDataFimaly: () =>
+      axios.post("/statistic/sumdatafimaly").then(res => res.data.rows),
     create: sets => axios.post("/api/books", sets).then(res => res.data.rows)
   }
 };

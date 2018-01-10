@@ -5,7 +5,8 @@ export default function sets(state = {}, action = {}) {
   switch (action.type) {
     case SETS_FETCHED:
     case SET_CREATED:
-      return { ...state, ...action.data.entities.sets };
+      return { ...state, ...action.data };
+    // return { ...state, ...action.data.entities.sets };
     default:
       return state;
   }

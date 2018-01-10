@@ -1,59 +1,249 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
-import { allSetsSelector } from "../../reducers/sets";
-import AddSetCtA from "../ctas/AddSetCtA";
-import { fetchSets } from "../../actions/sets";
-import DatasetTable from "../tabels/DatasetTable";
+import { Card, Label, List, Statistic } from "semantic-ui-react";
+import { fetchDataFimaly } from "../../actions/sets";
 
 class DashboardPage extends React.Component {
   state = {
-    param: {
-      standard: -1,
-      study: -1,
-      limit: 10,
-      offset: 0,
-      keyword: ""
+    data: {
+      setByStd: [],
+      setByStu: [],
+      groupByStd: [],
+      groupByStu: [],
+      metaStd: [],
+      metaStu: []
     }
   };
   componentDidMount = () => this.onInit(this.props);
-  onInit = props => props.fetchSets(this.state.param);
-  submit = param => this.props.fetchSets(param);
+  onInit = props => props.fetchDataFimaly();
   render() {
-    const { isConfirmed, sets } = this.props;
-    const total = Math.ceil(sets.length / 10);
-    const data = {};
-    data.total = total;
-    data.rows = sets;
-    const { param } = this.state;
-    return (
-      <div>
-        {isConfirmed && <ConfirmEmailMessage />}
-        {sets.length === 0 ? (
-          <AddSetCtA />
-        ) : (
-          <DatasetTable data={data} submit={this.submit} param={param} />
-        )}
-      </div>
+    const { data } = this.props;
+    console.log(data);
+    return Object.keys(data).length === 0 ? (
+      <p>数据加载中</p>
+    ) : (
+      <Card.Group itemsPerRow={3}>
+        <Card color="blue">
+          <Card.Content>
+            <Label corner="right" as="a" icon="grid layout" />
+            <Card.Header>数据集</Card.Header>
+            <Card.Meta />
+            <Card.Description>
+              <List divided relaxed>
+                <List.Item>
+                  <List.Icon
+                    name="building"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a" size="huge" href="/dataset">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.setStd.length === 2 && data.setStd[0].total}
+                          {data.setStd.length === 1 &&
+                            data.setStd[0].flag === 0 &&
+                            data.setStd[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon
+                    name="hospital"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.setStd.length === 2 && data.setStd[1].total}
+                          {data.setStd.length === 1 &&
+                            data.setStd[0].flag === 1 &&
+                            data.setStd[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon
+                    name="checkmark box"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.setStu.length === 2 && data.setStu[0].total}
+                          {data.setStu.length === 1 &&
+                            data.setStu[0].flag === 0 &&
+                            data.setStu[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+              </List>
+            </Card.Description>
+          </Card.Content>
+        </Card>
+        <Card color="blue">
+          <Card.Content>
+            <Label corner="right" as="a" icon="block layout" />
+            <Card.Header>数据组</Card.Header>
+            <Card.Meta />
+            <Card.Description>
+              <List divided relaxed>
+                <List.Item>
+                  <List.Icon
+                    name="building"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a" size="huge" href="/dataset">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.groupStd.length === 2 && data.groupStd[0].total}
+                          {data.groupStd.length === 1 &&
+                            data.groupStd[0].flag === 0 &&
+                            data.groupStd[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon
+                    name="hospital"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.groupStd.length === 2 && data.groupStd[1].total}
+                          {data.groupStd.length === 1 &&
+                            data.groupStd[0].flag === 1 &&
+                            data.groupStd[0].total}
+                          {data.groupStd.length === 1 &&
+                            data.groupStd[0].flag === 0 && <span>0</span>}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon
+                    name="checkmark box"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.groupStu.length === 2 && data.groupStu[0].total}
+                          {data.groupStu.length === 1 &&
+                            data.groupStu[0].flag === 0 &&
+                            data.groupStu[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+              </List>
+            </Card.Description>
+          </Card.Content>
+        </Card>
+        <Card color="blue">
+          <Card.Content>
+            <Label corner="right" as="a" icon="stop" />
+            <Card.Header>数据元</Card.Header>
+            <Card.Meta />
+            <Card.Description>
+              <List divided relaxed>
+                <List.Item>
+                  <List.Icon
+                    name="building"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a" size="huge" href="/dataset">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.metaStd.length === 2 && data.metaStd[0].total}
+                          {data.metaStd.length === 1 &&
+                            data.metaStd[0].flag === 0 &&
+                            data.metaStd[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon
+                    name="hospital"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.metaStd.length === 2 && data.metaStd[1].total}
+                          {data.metaStd.length === 1 &&
+                            data.metaStd[0].flag === 1 &&
+                            data.metaStd[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon
+                    name="checkmark box"
+                    size="large"
+                    verticalAlign="middle"
+                  />
+                  <List.Content>
+                    <List.Header as="a">
+                      <Statistic size="small">
+                        <Statistic.Value>
+                          {data.metaStu.length === 2 && data.metaStu[0].total}
+                          {data.metaStu.length === 1 &&
+                            data.metaStu[0].flag === 0 &&
+                            data.metaStu[0].total}
+                        </Statistic.Value>
+                      </Statistic>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+              </List>
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      </Card.Group>
     );
   }
 }
 
 DashboardPage.propTypes = {
-  isConfirmed: PropTypes.bool.isRequired,
-  sets: PropTypes.arrayOf(
-    PropTypes.shape({
-      ID: PropTypes.number.isRequired
-    }).isRequired
-  ).isRequired
+  data: PropTypes.shape({}).isRequired
 };
 
 function mapStateToProps(state) {
   return {
     isConfirmed: !!state.user.confirmed,
-    sets: allSetsSelector(state)
+    data: state.sets
   };
 }
 
-export default connect(mapStateToProps, { fetchSets })(DashboardPage);
+export default connect(mapStateToProps, { fetchDataFimaly })(DashboardPage);

@@ -14,10 +14,8 @@ const setCreated = data => ({
   data
 });
 
-export const fetchSets = param => dispatch =>
-  api.sets
-    .fetchAll(param)
-    .then(sets => dispatch(setsFetched(normalize(sets, [setSchema]))));
+export const fetchDataFimaly = param => dispatch =>
+  api.sets.fetchDataFimaly(param).then(sets => dispatch(setsFetched(sets)));
 
 export const createSet = data => dispatch =>
   api.sets

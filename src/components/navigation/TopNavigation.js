@@ -7,41 +7,31 @@ import gravatarUrl from "gravatar-url";
 import { logout } from "../../actions/auth";
 import { allSetsSelector } from "../../reducers/sets";
 
-const TopNavigation = ({ user, logout, hasSets, Selected }) => (
+const TopNavigation = ({ user, logout, hasSet }) => (
   <Menu secondary pointing>
     <Menu.Item as={Link} to="/dashboard">
       首页
     </Menu.Item>
-    {hasSets &&
-      !Selected && (
-        <Menu.Item as={Link} to="/sets/search">
-          选择数据集
-        </Menu.Item>
-      )}
-    {hasSets &&
-      !Selected && (
-        <Menu.Item as={Link} to="/sets/new">
-          新增数据集
-        </Menu.Item>
-      )}
-    {hasSets &&
-      Selected && (
-        <Menu.Item as={Link} to="/sets/addElement">
-          对照数据元
-        </Menu.Item>
-      )}
-    {hasSets &&
-      Selected && (
-        <Menu.Item as={Link} to="/sets/addElement">
-          添加数据元
-        </Menu.Item>
-      )}
-    {hasSets &&
-      Selected && (
-        <Menu.Item as={Link} to="/sets/addOption">
-          添加值域项
-        </Menu.Item>
-      )}
+    {!hasSet && (
+      <Menu.Item as={Link} to="/sets/new">
+        新增数据集
+      </Menu.Item>
+    )}
+    {hasSet && (
+      <Menu.Item as={Link} to="/sets/addElement">
+        对照数据元
+      </Menu.Item>
+    )}
+    {hasSet && (
+      <Menu.Item as={Link} to="/sets/addElement">
+        添加数据元
+      </Menu.Item>
+    )}
+    {hasSet && (
+      <Menu.Item as={Link} to="/sets/addOption">
+        添加值域项
+      </Menu.Item>
+    )}
     <Menu.Menu position="right">
       <Dropdown
         trigger={
@@ -60,14 +50,14 @@ TopNavigation.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string.isRequired
   }).isRequired,
-  hasSets: PropTypes.bool.isRequired,
+  hasSet: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     user: state.user,
-    hasSets: allSetsSelector(state).length > 0
+    hasSet: !!state.hasSet
   };
 }
 
