@@ -4,17 +4,20 @@ import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 import AddDatasetForm from "../forms/AddDatasetForm";
 import { save } from "../../actions/dataset";
+import { fetchSet } from "../../actions/sets";
 
-class NewSetPage extends React.Component {
+class EditSetPage extends React.Component {
+  componentDidMount = () => this.onInit(this.props);
+  onInit = props => props.fetchSet(props.activeRow);
   submit = data =>
     this.props.save(data).then(() => this.props.history.push("/sets"));
-
   render() {
+    const { data } = this.props;
     return (
       <Grid columns={3}>
         <Grid.Row>
           <Grid.Column>
-            <AddDatasetForm submit={this.submit} />
+            {data && <AddDatasetForm submit={this.submit} data={data} />}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -22,9 +25,16 @@ class NewSetPage extends React.Component {
   }
 }
 
-NewSetPage.propTypes = {
+EditSetPage.propTypes = {
   save: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
 };
 
-export default connect(null, { save })(NewSetPage);
+function mapStateToProps(state) {
+  return {
+    activeRow: { ID: state.sets.activeRow },
+    data: state.sets.activeRowData
+  };
+}
+
+export default connect(mapStateToProps, { save, fetchSet })(EditSetPage);

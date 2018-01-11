@@ -13,3 +13,6 @@ export const SPECIAL = 0;
 export const COMMON = 1;
 export const SETS_FETCHED = "SETS_FETCHED";
 export const SET_CREATED = "SET_CREATED";
+export const SET_SELECTED = "SET_SELECTED";
+export const SET_FETCHED = "SET_FETCHED";
+export const SET_CANCELSELECTED = "SET_CANCELSELECTED";

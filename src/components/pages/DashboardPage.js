@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Card, Label, List, Statistic } from "semantic-ui-react";
 import { fetchDataFimaly } from "../../actions/sets";
@@ -19,7 +20,6 @@ class DashboardPage extends React.Component {
   onInit = props => props.fetchDataFimaly();
   render() {
     const { data } = this.props;
-    console.log(data);
     return Object.keys(data).length === 0 ? (
       <p>数据加载中</p>
     ) : (
@@ -29,61 +29,51 @@ class DashboardPage extends React.Component {
             <Label corner="right" as="a" icon="grid layout" />
             <Card.Header>数据集</Card.Header>
             <Card.Meta />
-            <Card.Description>
+            <Card.Description textAlign="center">
               <List divided relaxed>
                 <List.Item>
-                  <List.Icon
-                    name="building"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
-                    <List.Header as="a" size="huge" href="/dataset">
-                      <Statistic size="small">
+                    <List.Header as={Link} size="huge" to="/sets">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.setStd.length === 2 && data.setStd[0].total}
                           {data.setStd.length === 1 &&
                             data.setStd[0].flag === 0 &&
                             data.setStd[0].total}
                         </Statistic.Value>
+                        <Statistic.Label>国标</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
-                  <List.Icon
-                    name="hospital"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
                     <List.Header as="a">
-                      <Statistic size="small">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.setStd.length === 2 && data.setStd[1].total}
                           {data.setStd.length === 1 &&
                             data.setStd[0].flag === 1 &&
                             data.setStd[0].total}
+                          {data.setStd.length === 1 &&
+                            data.setStd[0].flag === 0 && <span>0</span>}
                         </Statistic.Value>
+                        <Statistic.Label>企标</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
-                  <List.Icon
-                    name="checkmark box"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
                     <List.Header as="a">
-                      <Statistic size="small">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.setStu.length === 2 && data.setStu[0].total}
                           {data.setStu.length === 1 &&
                             data.setStu[0].flag === 0 &&
                             data.setStu[0].total}
                         </Statistic.Value>
+                        <Statistic.Label>未审核</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
@@ -97,36 +87,29 @@ class DashboardPage extends React.Component {
             <Label corner="right" as="a" icon="block layout" />
             <Card.Header>数据组</Card.Header>
             <Card.Meta />
-            <Card.Description>
+            <Card.Description textAlign="center">
               <List divided relaxed>
                 <List.Item>
-                  <List.Icon
-                    name="building"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
-                    <List.Header as="a" size="huge" href="/dataset">
-                      <Statistic size="small">
+                    <List.Header as={Link} to="/groups" size="huge">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.groupStd.length === 2 && data.groupStd[0].total}
                           {data.groupStd.length === 1 &&
                             data.groupStd[0].flag === 0 &&
                             data.groupStd[0].total}
+                          {data.groupStd.length === 1 &&
+                            data.groupStd[0].flag === 1 && <span>0</span>}
                         </Statistic.Value>
+                        <Statistic.Label>国标</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
-                  <List.Icon
-                    name="hospital"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
                     <List.Header as="a">
-                      <Statistic size="small">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.groupStd.length === 2 && data.groupStd[1].total}
                           {data.groupStd.length === 1 &&
@@ -135,25 +118,22 @@ class DashboardPage extends React.Component {
                           {data.groupStd.length === 1 &&
                             data.groupStd[0].flag === 0 && <span>0</span>}
                         </Statistic.Value>
+                        <Statistic.Label>企标</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
-                  <List.Icon
-                    name="checkmark box"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
                     <List.Header as="a">
-                      <Statistic size="small">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.groupStu.length === 2 && data.groupStu[0].total}
                           {data.groupStu.length === 1 &&
                             data.groupStu[0].flag === 0 &&
                             data.groupStu[0].total}
                         </Statistic.Value>
+                        <Statistic.Label>未审核</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
@@ -167,61 +147,49 @@ class DashboardPage extends React.Component {
             <Label corner="right" as="a" icon="stop" />
             <Card.Header>数据元</Card.Header>
             <Card.Meta />
-            <Card.Description>
+            <Card.Description textAlign="center">
               <List divided relaxed>
                 <List.Item>
-                  <List.Icon
-                    name="building"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
-                    <List.Header as="a" size="huge" href="/dataset">
-                      <Statistic size="small">
+                    <List.Header as={Link} size="huge" to="/elments">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.metaStd.length === 2 && data.metaStd[0].total}
                           {data.metaStd.length === 1 &&
                             data.metaStd[0].flag === 0 &&
                             data.metaStd[0].total}
                         </Statistic.Value>
+                        <Statistic.Label>国标</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
-                  <List.Icon
-                    name="hospital"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
                     <List.Header as="a">
-                      <Statistic size="small">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.metaStd.length === 2 && data.metaStd[1].total}
                           {data.metaStd.length === 1 &&
                             data.metaStd[0].flag === 1 &&
                             data.metaStd[0].total}
                         </Statistic.Value>
+                        <Statistic.Label>企标</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
-                  <List.Icon
-                    name="checkmark box"
-                    size="large"
-                    verticalAlign="middle"
-                  />
                   <List.Content>
                     <List.Header as="a">
-                      <Statistic size="small">
+                      <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.metaStu.length === 2 && data.metaStu[0].total}
                           {data.metaStu.length === 1 &&
                             data.metaStu[0].flag === 0 &&
                             data.metaStu[0].total}
                         </Statistic.Value>
+                        <Statistic.Label>未审核</Statistic.Label>
                       </Statistic>
                     </List.Header>
                   </List.Content>

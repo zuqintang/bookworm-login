@@ -8,6 +8,7 @@ import DashboardPage from "./components/pages/DashboardPage";
 import SignupPage from "./components/pages/SignupPage";
 import DatasetPage from "./components/pages/DatasetPage";
 import NewSetPage from "./components/pages/NewSetPage";
+import EditSetPage from "./components/pages/EditSetPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
@@ -29,17 +30,18 @@ const App = ({ location, isAuthenticated }) => (
       exact
       component={DashboardPage}
     />
-    <UserRoute
-      location={location}
-      path="/dataset"
-      exact
-      component={DatasetPage}
-    />
+    <UserRoute location={location} path="/sets" exact component={DatasetPage} />
     <UserRoute
       location={location}
       path="/sets/new"
       exact
       component={NewSetPage}
+    />
+    <UserRoute
+      location={location}
+      path="/sets/edit"
+      exact
+      component={EditSetPage}
     />
   </div>
 );

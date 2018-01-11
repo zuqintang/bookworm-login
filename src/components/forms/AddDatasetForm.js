@@ -1,18 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import { Form, Button } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
 import { DATA_SET_TYPE, NATIONAL, ENTERPRISE } from "../../types";
+import { cancelSelectSet } from "../../actions/sets";
 
 class AddDatasetForm extends React.Component {
   state = {
-    data: {
-      STANDARD: "",
-      ID: "",
+    data: this.props.data || {
+      CREATED_AT: "",
+      CREATOR: "",
+      DATA_SET_TYPE,
+      DIS_GROUP: 0,
+      DS_CODE: "",
+      DS_GROUP: 0,
       DS_NAME: "",
-      STUDY_TYPE: "",
-      DATA_SET_TYPE
+      ID: 0,
+      PYM: "",
+      STANDARD: 0,
+      STUDY_TYPE: 1,
+      UPDATED_AT: "",
+      WBM: "",
+      YEAR_VERSION: 0
     },
     errors: {},
     loading: false
@@ -45,8 +57,7 @@ class AddDatasetForm extends React.Component {
     return errors;
   };
   render() {
-    const { data, loading, errors } = this.state;
-    const { close } = this.props;
+    const { loading, errors, data } = this.state;
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
         <Form.Field error={!!errors.STANDARD}>
@@ -101,7 +112,13 @@ class AddDatasetForm extends React.Component {
           {errors.STUDY_TYPE && <InlineError text={errors.STUDY_TYPE} />}
         </Form.Field>
         <Button.Group>
-          <Button onClick={close}>取消</Button>
+          <Button
+            onClick={() => this.props.cancelSelectSet()}
+            as={Link}
+            to="/sets"
+          >
+            取消
+          </Button>
           <Button.Or />
           <Button positive>保存</Button>
         </Button.Group>
@@ -110,7 +127,6 @@ class AddDatasetForm extends React.Component {
   }
 }
 AddDatasetForm.propTypes = {
-  submit: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired
 };
-export default AddDatasetForm;
+export default connect(null, { cancelSelectSet })(AddDatasetForm);

@@ -5,6 +5,7 @@ import { Label, Grid } from "semantic-ui-react";
 import DatasetForm from "../forms/DatasetForm";
 import DatasetTable from "../tabels/DatasetTable";
 import { search } from "../../actions/dataset";
+import * as actions from "../../actions/sets";
 
 class DatasetPage extends React.Component {
   state = {
@@ -19,7 +20,10 @@ class DatasetPage extends React.Component {
     }
   };
   setParam = param => this.setState({ param });
-  setActiveRow = activeRow => this.setState({ activeRow });
+  setActiveRow = activeRow => {
+    this.setState({ activeRow });
+    this.props.selectSet({ activeRow });
+  };
   getActiveRow = () => this.state.activeRow;
   submit = param =>
     this.props.search(param).then(res => this.setState({ data: res }));
@@ -51,7 +55,10 @@ class DatasetPage extends React.Component {
   }
 }
 DatasetPage.propTypes = {
-  search: PropTypes.func.isRequired
+  search: PropTypes.func.isRequired,
+  selectSet: PropTypes.func.isRequired
 };
 
-export default connect(null, { search })(DatasetPage);
+export default connect(null, { search, selectSet: actions.selectSet })(
+  DatasetPage
+);

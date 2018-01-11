@@ -5,31 +5,41 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
 import { logout } from "../../actions/auth";
-import { allSetsSelector } from "../../reducers/sets";
 
-const TopNavigation = ({ user, logout, hasSet }) => (
+const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
   <Menu secondary pointing>
     <Menu.Item as={Link} to="/dashboard">
       首页
     </Menu.Item>
-    {!hasSet && (
-      <Menu.Item as={Link} to="/sets/new">
-        新增数据集
+    {!hasSet &&
+      !selectSet && (
+        <Menu.Item as={Link} to="/sets/new">
+          新增数据集
+        </Menu.Item>
+      )}
+    {selectSet && (
+      <Menu.Item as={Link} to="/sets/edit">
+        修改数据集
       </Menu.Item>
     )}
-    {hasSet && (
+    {selectSet && (
+      <Menu.Item as={Link} to="/sets/info">
+        添加数据组
+      </Menu.Item>
+    )}
+    {selectSet && (
       <Menu.Item as={Link} to="/sets/addElement">
         对照数据元
       </Menu.Item>
     )}
-    {hasSet && (
-      <Menu.Item as={Link} to="/sets/addElement">
-        添加数据元
-      </Menu.Item>
-    )}
-    {hasSet && (
+    {selectSet && (
       <Menu.Item as={Link} to="/sets/addOption">
         添加值域项
+      </Menu.Item>
+    )}
+    {selectSet && (
+      <Menu.Item as={Link} to="/sets/info">
+        添加数据元
       </Menu.Item>
     )}
     <Menu.Menu position="right">
@@ -51,13 +61,15 @@ TopNavigation.propTypes = {
     username: PropTypes.string.isRequired
   }).isRequired,
   hasSet: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  selectSet: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     user: state.user,
-    hasSet: !!state.hasSet
+    hasSet: !!state.hasSet,
+    selectSet: !!state.sets.activeRow
   };
 }
 
