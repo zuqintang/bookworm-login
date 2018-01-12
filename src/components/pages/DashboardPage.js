@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Card, Label, List, Statistic } from "semantic-ui-react";
-import { fetchDataFimaly } from "../../actions/sets";
+import { fetchFimaly } from "../../actions/sets";
 
 class DashboardPage extends React.Component {
   state = {
@@ -214,4 +214,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchDataFimaly })(DashboardPage);
+export default connect(mapStateToProps, { fetchFimaly })(DashboardPage);

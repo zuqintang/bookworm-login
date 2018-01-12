@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Label, Grid } from "semantic-ui-react";
 import SetPageForm from "../forms/SetPageForm";
-import DatasetTable from "../tabels/DatasetTable";
-import { search } from "../../actions/dataset";
+import SetTable from "../tabels/SetTable";
 import * as actions from "../../actions/sets";
 
 class SetPage extends React.Component {
@@ -30,7 +29,7 @@ class SetPage extends React.Component {
   getActiveRow = () => this.state.activeRow;
 
   submit = param =>
-    this.props.search(param).then(res => this.setState({ data: res }));
+    this.props.fetchSets(param).then(res => this.setState({ data: res }));
   handleContextRef = contextRef => this.setState({ contextRef });
 
   render() {
@@ -45,7 +44,7 @@ class SetPage extends React.Component {
             <SetPageForm submit={this.submit} setParam={this.setParam} />
           </Grid.Column>
           <Grid.Column width={16}>
-            <DatasetTable
+            <SetTable
               data={this.state.data}
               submit={this.submit}
               param={param}
@@ -59,8 +58,11 @@ class SetPage extends React.Component {
   }
 }
 SetPage.propTypes = {
-  search: PropTypes.func.isRequired,
+  fetchSets: PropTypes.func.isRequired,
   selectSet: PropTypes.func.isRequired
 };
 
-export default connect(null, { search, selectSet: actions.selectSet })(SetPage);
+export default connect(null, {
+  fetchSets: actions.fetchSets,
+  selectSet: actions.selectSet
+})(SetPage);

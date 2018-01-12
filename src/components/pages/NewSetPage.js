@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 import AddSetForm from "../forms/AddSetForm";
-import { save } from "../../actions/dataset";
+import { fetchFimaly } from "../../actions/sets";
 import { DATA_SET_TYPE } from "../../types";
 
 class NewSetPage extends React.Component {
@@ -28,4 +28,4 @@ NewSetPage.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
 };
 
-export default connect(null, { save })(NewSetPage);
+export default connect(null, { fetchFimaly })(NewSetPage);

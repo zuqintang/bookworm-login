@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 import AddSetForm from "../forms/AddSetForm";
-import { save } from "../../actions/dataset";
-import { fetchSet } from "../../actions/sets";
+import * as action from "../../actions/sets";
 
 class EditSetPage extends React.Component {
   componentDidMount = () => this.onInit(this.props);
@@ -41,4 +40,7 @@ EditSetPage.propTypes = {
   data: PropTypes.shape({}).isRequired
 };
 
-export default connect(mapStateToProps, { save, fetchSet })(EditSetPage);
+export default connect(mapStateToProps, {
+  saveSet: action.saveSet,
+  fetchSet: action.fetchSet
+})(EditSetPage);

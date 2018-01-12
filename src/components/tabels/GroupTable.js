@@ -4,7 +4,7 @@ import { Table, Dimmer, Loader } from "semantic-ui-react";
 import Paginator from "../tools/Paginator";
 import GroupRows from "../rows/GroupRows";
 
-class DatagroupTable extends React.Component {
+class GroupTable extends React.Component {
   state = { activeRow: 0, data: { rows: [] }, active: false };
   getActiveRow = () => {
     const activeRowID = this.state.activeRow;
@@ -64,7 +64,7 @@ class DatagroupTable extends React.Component {
   }
 }
 
-DatagroupTable.propTypes = {
+GroupTable.propTypes = {
   submit: PropTypes.func.isRequired,
   data: PropTypes.shape({
     total: PropTypes.number.isRequired,
@@ -73,4 +73,4 @@ DatagroupTable.propTypes = {
   getParam: PropTypes.func.isRequired
 };
 
-export default DatagroupTable;
+export default GroupTable;

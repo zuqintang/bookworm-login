@@ -7,37 +7,35 @@ export default {
       axios.post("/auth/login", credentials).then(res => res.data.rows),
     signup: user => axios.post("/auth/users", user).then(res => res.data.rows)
   },
-  dataset: {
-    search: param =>
-      axios.post("/Dataset/search", qs.stringify(param)).then(res => res.data),
-    searchSetChildren: param =>
+  set: {
+    fetchSets: param =>
+      axios.post("/set/fetchSets", qs.stringify(param)).then(res => res.data),
+    fetchSetChildren: param =>
       axios
-        .post("/Dataset/searchSetChildren", qs.stringify(param), {
+        .post("/set/fetchSetChildren", qs.stringify(param), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
           }
         })
         .then(res => res.data),
-    save: param =>
+    saveSet: param =>
       axios
-        .post("/Dataset/addSet", qs.stringify(param), {
+        .post("/set/saveSet", qs.stringify(param), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
           }
         })
         .then(res => res.data),
-    searchSetInfo: param =>
+    fetchSet: param =>
       axios
-        .post("/Dataset/searchSetInfo", qs.stringify(param), {
+        .post("/set/fetchSet", qs.stringify(param), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
           }
         })
-        .then(res => res.data)
-  },
-  sets: {
-    fetchDataFimaly: () =>
-      axios.post("/statistic/sumdatafimaly").then(res => res.data.rows),
-    create: sets => axios.post("/api/books", sets).then(res => res.data.rows)
+        .then(res => res.data),
+    fetchFimaly: () =>
+      axios.post("/statistic/fetchFimaly").then(res => res.data.rows),
+    createSet: sets => axios.post("/api/books", sets).then(res => res.data.rows)
   }
 };

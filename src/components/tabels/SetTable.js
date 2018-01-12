@@ -4,7 +4,7 @@ import { Table, Dimmer, Loader, Grid } from "semantic-ui-react";
 import SetRows from "../rows/SetRows";
 import Paginator from "../tools/Paginator";
 
-class DatasetTable extends React.Component {
+class SetTable extends React.Component {
   state = {};
   handleRowClick = e => {
     const activeRowID = parseInt(e.target.name, 10);
@@ -63,7 +63,7 @@ class DatasetTable extends React.Component {
   }
 }
 
-DatasetTable.propTypes = {
+SetTable.propTypes = {
   submit: PropTypes.func.isRequired,
   getActiveRow: PropTypes.func.isRequired,
   setActiveRow: PropTypes.func.isRequired,
@@ -79,4 +79,4 @@ DatasetTable.propTypes = {
   }).isRequired
 };
 
-export default DatasetTable;
+export default SetTable;
