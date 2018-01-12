@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Label, Grid } from "semantic-ui-react";
-import DatasetForm from "../forms/DatasetForm";
-import DatasetSelectTable from "../tabels/DatasetSelectTable";
+import SetPageForm from "../forms/SetPageForm";
+import DatasetTable from "../tabels/DatasetTable";
 import { search } from "../../actions/dataset";
+import * as actions from "../../actions/sets";
 
-class DatasetSelectPage extends React.Component {
+class SetPage extends React.Component {
   state = {
     data: { rows: [], total: 0 },
+    activeRow: 0,
     param: {
       standard: -1,
       study: -1,
@@ -17,20 +19,18 @@ class DatasetSelectPage extends React.Component {
       keyword: ""
     }
   };
+  componentDidMount = () => this.onInit(this.state.param);
+  onInit = param => this.submit(param);
+
   setParam = param => this.setState({ param });
-  submit = param => {
-    const rows = [];
-    const data = this.props.data;
-    let i = param.offset;
-    console.log(i);
-    const total = data[1].length > 10 ? 10 : data[1].length;
-    for (; i < 10; ) {
-      rows.push(data[0].sets[data[1][(i += 1)]]);
-    }
-    console.log(rows);
-    this.setState({ data: { rows, total: data[1].length } });
+  setActiveRow = activeRow => {
+    this.setState({ activeRow });
+    this.props.selectSet({ activeRow });
   };
-  // this.props.search(param).then(res => this.setState({ data: res }));
+  getActiveRow = () => this.state.activeRow;
+
+  submit = param =>
+    this.props.search(param).then(res => this.setState({ data: res }));
   handleContextRef = contextRef => this.setState({ contextRef });
 
   render() {
@@ -42,14 +42,15 @@ class DatasetSelectPage extends React.Component {
             <Label as="a" color="teal" ribbon>
               筛选条件
             </Label>
-            <DatasetForm submit={this.submit} setParam={this.setParam} />
+            <SetPageForm submit={this.submit} setParam={this.setParam} />
           </Grid.Column>
           <Grid.Column width={16}>
-            <DatasetSelectTable
+            <DatasetTable
               data={this.state.data}
               submit={this.submit}
               param={param}
-              setParam={this.setParam}
+              setActiveRow={this.setActiveRow}
+              getActiveRow={this.getActiveRow}
             />
           </Grid.Column>
         </Grid.Row>
@@ -57,8 +58,9 @@ class DatasetSelectPage extends React.Component {
     );
   }
 }
-DatasetSelectPage.propTypes = {
-  search: PropTypes.func.isRequired
+SetPage.propTypes = {
+  search: PropTypes.func.isRequired,
+  selectSet: PropTypes.func.isRequired
 };
 
-export default connect(null, { search })(DatasetSelectPage);
+export default connect(null, { search, selectSet: actions.selectSet })(SetPage);

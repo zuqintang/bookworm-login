@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import AddSetForm from "../forms/AddSetForm";
 import { save } from "../../actions/dataset";
-import { DATA_SET_TYPE } from "../../types";
+import { DATA_GROUP_TYPE } from "../../types";
 
-class NewSetPage extends React.Component {
+class NewGroupPage extends React.Component {
   submit = data =>
     this.props.save(data).then(() => this.props.history.push("/sets"));
 
@@ -15,7 +15,8 @@ class NewSetPage extends React.Component {
       <Grid columns={3}>
         <Grid.Row>
           <Grid.Column>
-            <AddSetForm submit={this.submit} type={DATA_SET_TYPE} />
+            <Header>数据组</Header>
+            <AddSetForm submit={this.submit} type={DATA_GROUP_TYPE} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -23,9 +24,9 @@ class NewSetPage extends React.Component {
   }
 }
 
-NewSetPage.propTypes = {
+NewGroupPage.propTypes = {
   save: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
 };
 
-export default connect(null, { save })(NewSetPage);
+export default connect(null, { save })(NewGroupPage);

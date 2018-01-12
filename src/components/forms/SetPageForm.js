@@ -15,7 +15,7 @@ const studyOptions = [
   { key: 2, text: "通用-人口信息学", value: COMMON }
 ];
 
-class DatasetForm extends React.Component {
+class SetPageForm extends React.Component {
   state = {
     data: { standard: -1, study: -1, keyword: "", limit: 10, offset: 0 },
     loading: false
@@ -85,9 +85,9 @@ class DatasetForm extends React.Component {
   }
 }
 
-DatasetForm.propTypes = {
+SetPageForm.propTypes = {
   setParam: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired
 };
 
-export default DatasetForm;
+export default SetPageForm;

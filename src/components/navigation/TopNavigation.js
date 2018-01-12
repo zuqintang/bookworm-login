@@ -4,7 +4,7 @@ import { Menu, Dropdown, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
-import { logout } from "../../actions/auth";
+import * as action from "../../actions/auth";
 
 const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
   <Menu secondary pointing>
@@ -17,18 +17,48 @@ const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
           新增数据集
         </Menu.Item>
       )}
+    {!hasSet &&
+      !selectSet && (
+        <Menu.Item as={Link} to="/sets/new">
+          检索与导出
+        </Menu.Item>
+      )}
+    {!hasSet &&
+      !selectSet && (
+        <Menu.Item as={Link} to="/sets/new">
+          同义元映射
+        </Menu.Item>
+      )}
+    {!hasSet &&
+      !selectSet && (
+        <Menu.Item as={Link} to="/sets/new">
+          概念域后关联
+        </Menu.Item>
+      )}
+    {!hasSet &&
+      !selectSet && (
+        <Menu.Item as={Link} to="/sets/new">
+          EPM数据同步
+        </Menu.Item>
+      )}
+    {!hasSet &&
+      !selectSet && (
+        <Menu.Item as={Link} to="/sets/new">
+          引用查询
+        </Menu.Item>
+      )}
     {selectSet && (
       <Menu.Item as={Link} to="/sets/edit">
         修改数据集
       </Menu.Item>
     )}
     {selectSet && (
-      <Menu.Item as={Link} to="/sets/info">
+      <Menu.Item as={Link} to="/sets/group">
         添加数据组
       </Menu.Item>
     )}
     {selectSet && (
-      <Menu.Item as={Link} to="/sets/addElement">
+      <Menu.Item as={Link} to="/sets/element">
         对照数据元
       </Menu.Item>
     )}
@@ -44,9 +74,7 @@ const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
     )}
     <Menu.Menu position="right">
       <Dropdown
-        trigger={
-          <Image avatar src={gravatarUrl(user.username + "@hotmail.com")} />
-        }
+        trigger={<Image avatar src={gravatarUrl(`${user.username}@cde.com`)} />}
       >
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => logout()}>登出</Dropdown.Item>
@@ -73,4 +101,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { logout })(TopNavigation);
+export default connect(mapStateToProps, { logout: action.logout })(
+  TopNavigation
+);

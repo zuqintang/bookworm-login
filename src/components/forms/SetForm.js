@@ -103,19 +103,11 @@ class SetForm extends React.Component {
                   )}
                 </Form.Field>
               </Grid.Column>
-
-              {/* <Grid.Column>
-                <Image size="small" src={data.cover} />
-                {this.state.covers.length > 1 && (
-                  <a role="button" tabIndex={0} onClick={this.changeCover}>
-                    Another cover
-                  </a>
-                )}
-              </Grid.Column> */}
             </Grid.Row>
 
             <Grid.Row>
-              <Button primary>Save</Button>
+              <Button primary>添加</Button>
+              <Button primary>提交新增</Button>
             </Grid.Row>
           </Grid>
         </Form>

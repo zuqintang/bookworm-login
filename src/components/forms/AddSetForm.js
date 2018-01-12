@@ -6,11 +6,11 @@ import moment from "moment";
 import { Form, Button } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
 import { DATA_SET_TYPE, NATIONAL, ENTERPRISE } from "../../types";
-import { cancelSelectSet } from "../../actions/sets";
+import * as action from "../../actions/sets";
 
-class AddDatasetForm extends React.Component {
+class AddSetForm extends React.Component {
   state = {
-    data: this.props.data || {
+    data: {
       CREATED_AT: "",
       CREATOR: "",
       DATA_SET_TYPE,
@@ -29,6 +29,13 @@ class AddDatasetForm extends React.Component {
     errors: {},
     loading: false
   };
+
+  componentDidMount = () => this.onInit(this.props);
+  onInit = props => {
+    this.setState({ DATA_SET_TYPE: props.type });
+    if (props.data) this.setState({ data: props.data });
+  };
+
   onSubmit = () => {
     const errors = this.validate(this.state.data);
     const time = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -44,11 +51,13 @@ class AddDatasetForm extends React.Component {
       });
     }
   };
+
   onChange = e => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value }
     });
   };
+
   validate = data => {
     const errors = {};
     if (!data.STANDARD) errors.STANDARD = "请选择标准";
@@ -56,8 +65,10 @@ class AddDatasetForm extends React.Component {
     if (!data.STUDY_TYPE) errors.STUDY_TYPE = "请选择类别";
     return errors;
   };
+
   render() {
     const { loading, errors, data } = this.state;
+    const { cancelSelectSet } = this.props;
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
         <Form.Field error={!!errors.STANDARD}>
@@ -112,11 +123,7 @@ class AddDatasetForm extends React.Component {
           {errors.STUDY_TYPE && <InlineError text={errors.STUDY_TYPE} />}
         </Form.Field>
         <Button.Group>
-          <Button
-            onClick={() => this.props.cancelSelectSet()}
-            as={Link}
-            to="/sets"
-          >
+          <Button onClick={() => cancelSelectSet()} as={Link} to="/sets">
             取消
           </Button>
           <Button.Or />
@@ -126,7 +133,10 @@ class AddDatasetForm extends React.Component {
     );
   }
 }
-AddDatasetForm.propTypes = {
-  submit: PropTypes.func.isRequired
+AddSetForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+  cancelSelectSet: PropTypes.func.isRequired
 };
-export default connect(null, { cancelSelectSet })(AddDatasetForm);
+export default connect(null, { cancelSelectSet: action.cancelSelectSet })(
+  AddSetForm
+);

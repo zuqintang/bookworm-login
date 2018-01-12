@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Segment, Label, List } from "semantic-ui-react";
 import { FormatStandard, FormatStudy } from "../tools/Formater";
 
@@ -59,5 +60,9 @@ const SetInfo = ({ data }) => (
     </List>
   </Segment>
 );
+
+SetInfo.propTypes = {
+  data: PropTypes.shape({}).isRequired
+};
 
 export default SetInfo;

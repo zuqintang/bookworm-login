@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Label, Grid } from "semantic-ui-react";
-import DatasetForm from "../forms/DatasetForm";
+import { Grid } from "semantic-ui-react";
 import DatasetTable from "../tabels/DatasetTable";
+import NewElementPage from "./NewElementPage";
 import { search } from "../../actions/dataset";
 import * as actions from "../../actions/sets";
 
-class DatasetPage extends React.Component {
+class ElementOfSetPage extends React.Component {
   state = {
     data: { rows: [], total: 0 },
     activeRow: 0,
@@ -34,13 +34,10 @@ class DatasetPage extends React.Component {
     return (
       <Grid>
         <Grid.Row>
-          <Grid.Column width={16}>
-            <Label as="a" color="teal" ribbon>
-              筛选条件
-            </Label>
-            <DatasetForm submit={this.submit} setParam={this.setParam} />
+          <Grid.Column width={8}>
+            <NewElementPage />
           </Grid.Column>
-          <Grid.Column width={16}>
+          <Grid.Column width={8}>
             <DatasetTable
               data={this.state.data}
               submit={this.submit}
@@ -54,11 +51,11 @@ class DatasetPage extends React.Component {
     );
   }
 }
-DatasetPage.propTypes = {
+ElementOfSetPage.propTypes = {
   search: PropTypes.func.isRequired,
   selectSet: PropTypes.func.isRequired
 };
 
 export default connect(null, { search, selectSet: actions.selectSet })(
-  DatasetPage
+  ElementOfSetPage
 );

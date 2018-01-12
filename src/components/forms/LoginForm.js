@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Form, Button, Grid, Header, Icon, Message } from "semantic-ui-react";
 import background from "../../asserts/images/background.jpg";
 import InlineError from "../messages/InlineError";
@@ -34,11 +35,15 @@ class LoginForm extends React.Component {
       <Grid verticalAlign="middle" textAlign="center">
         <style>
           {`
-          body>div{background-image:url("` +
-            background +
-            `");background-position:center;background-repeat:no-repeat;background-size:cover}
-          body>div, body>div>div, body>div>div>div{height:100%}
-           body>div>div>div>div{height:90%}        `}
+          body > div {
+            background-image:url("${background}");
+            background-position:center;
+            background-repeat:no-repeat;
+            background-size:cover
+          }
+          body > div, body > div > div, body > div > div > div { height:100% }
+          body > div > div > div > div { height:90% }
+           `}
         </style>
         <Grid.Column width={6}>
           <Header as="h1" inverted color="grey" textAlign="center">
@@ -89,5 +94,9 @@ class LoginForm extends React.Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  submit: PropTypes.func.isRequired
+};
 
 export default LoginForm;

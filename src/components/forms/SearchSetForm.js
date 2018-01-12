@@ -45,7 +45,6 @@ class SearchSetForm extends React.Component {
           });
         });
         this.setState({ loading: false, options, sets: setsHash });
-        console.log(this.state);
       });
   };
   render() {

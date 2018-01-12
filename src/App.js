@@ -6,9 +6,12 @@ import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import SignupPage from "./components/pages/SignupPage";
-import DatasetPage from "./components/pages/DatasetPage";
+import SetPage from "./components/pages/SetPage";
 import NewSetPage from "./components/pages/NewSetPage";
 import EditSetPage from "./components/pages/EditSetPage";
+import GroupOfSetPage from "./components/pages/GroupOfSetPage";
+import ElementOfSetPage from "./components/pages/ElementOfSetPage";
+import NewGroupPage from "./components/pages/NewGroupPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
@@ -30,7 +33,7 @@ const App = ({ location, isAuthenticated }) => (
       exact
       component={DashboardPage}
     />
-    <UserRoute location={location} path="/sets" exact component={DatasetPage} />
+    <UserRoute location={location} path="/sets" exact component={SetPage} />
     <UserRoute
       location={location}
       path="/sets/new"
@@ -42,6 +45,24 @@ const App = ({ location, isAuthenticated }) => (
       path="/sets/edit"
       exact
       component={EditSetPage}
+    />
+    <UserRoute
+      location={location}
+      path="/sets/group"
+      exact
+      component={GroupOfSetPage}
+    />
+    <UserRoute
+      location={location}
+      path="/sets/element"
+      exact
+      component={ElementOfSetPage}
+    />
+    <UserRoute
+      location={location}
+      path="/groups/new"
+      exact
+      component={NewGroupPage}
     />
   </div>
 );

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
-import AddDatasetForm from "../forms/AddDatasetForm";
+import AddSetForm from "../forms/AddSetForm";
 import { save } from "../../actions/dataset";
 import { fetchSet } from "../../actions/sets";
 
@@ -17,7 +17,7 @@ class EditSetPage extends React.Component {
       <Grid columns={3}>
         <Grid.Row>
           <Grid.Column>
-            {data && <AddDatasetForm submit={this.submit} data={data} />}
+            {data && <AddSetForm submit={this.submit} data={data} />}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -36,5 +36,9 @@ function mapStateToProps(state) {
     data: state.sets.activeRowData
   };
 }
+
+EditSetPage.propTypes = {
+  data: PropTypes.shape({}).isRequired
+};
 
 export default connect(mapStateToProps, { save, fetchSet })(EditSetPage);

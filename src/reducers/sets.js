@@ -17,13 +17,13 @@ export default function sets(state = {}, action = {}) {
     case SET_FETCHED:
       return { ...state, activeRowData: action.data };
     case SET_CANCELSELECTED:
-      return { ...state, activeRowData: null, acitveRow: 0 };
+      return { ...state, activeRowData: null, activeRow: 0 };
     default:
       return state;
   }
 }
 
-//SELECTORS
+//  SELECTORS
 
 export const setsSelector = state => state.sets;
 

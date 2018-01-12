@@ -8,7 +8,7 @@ const HomePage = ({ isAuthenticated, logout }) => (
   <div>
     <h4>数据元管理平台</h4>
     {isAuthenticated ? (
-      <button onClick={() => logout()}>Logout</button>
+      <button onClick={() => logout()}>退出系统</button>
     ) : (
       <div>
         <Link to="/login">登录</Link> or <Link to="signup">添加用户</Link>

@@ -39,11 +39,15 @@ class SignupForm extends React.Component {
       <Grid verticalAlign="middle" textAlign="center">
         <style>
           {`
-          body>div{background-image:url("` +
-            background +
-            `");background-position:center;background-repeat:no-repeat;background-size:cover}
-          body>div, body>div>div, body>div>div>div{height:100%}
-           body>div>div>div>div{height:90%}        `}
+          body > div {
+            background-image:url("${background}");
+            background-position:center;
+            background-repeat:no-repeat;
+            background-size:cover
+          }
+          body > div, body > div > div, body > div > div > div { height:100% }
+          body > div > div > div > div { height:90% }
+           `}
         </style>
         <Grid.Column width={6}>
           <Header as="h1" inverted color="grey" textAlign="center">

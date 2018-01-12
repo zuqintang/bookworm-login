@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Segment, Label, Grid, Button, Form } from "semantic-ui-react";
-import DatasetPanel from "../panels/DatasetPanel";
+import SetPanel from "../panels/SetPanel";
 import SetInfo from "../infos/SetInfo";
 
 class ImportPage extends React.Component {
@@ -37,7 +37,7 @@ class ImportPage extends React.Component {
           </Segment>
         </Grid.Column>
         <Grid.Column width={11}>
-          <DatasetPanel getActiveRow={getActiveRow} />
+          <SetPanel getActiveRow={getActiveRow} />
         </Grid.Column>
       </Grid>
     );

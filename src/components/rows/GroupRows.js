@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Table, Label } from "semantic-ui-react";
-import DatasetPanel from "../panels/DatasetPanel";
+import SetPanel from "../panels/SetPanel";
 import { FormatStandard, FormatStudy } from "../tools/Formater";
 
 function GroupRows(props) {
@@ -80,7 +80,7 @@ function GroupRows(props) {
         )}
         {activeRow === row.ID && (
           <Table.Cell colSpan={5}>
-            <DatasetPanel getActiveRow={getActiveRow} />
+            <SetPanel getActiveRow={getActiveRow} />
           </Table.Cell>
         )}
       </Table.Row>

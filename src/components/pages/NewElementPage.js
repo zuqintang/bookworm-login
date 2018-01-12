@@ -6,7 +6,7 @@ import SearchSetForm from "../forms/SearchSetForm";
 import SetForm from "../forms/SetForm";
 import { createSet } from "../../actions/sets";
 
-class NewSetPage extends React.Component {
+class NewElementPage extends React.Component {
   state = {
     set: null
   };
@@ -19,7 +19,7 @@ class NewSetPage extends React.Component {
   render() {
     return (
       <Segment>
-        <h1>添加新的数据元到数据集</h1>
+        <h4>添加新的数据元到数据集</h4>
         <SearchSetForm onSetSelect={this.onSetSelect} />
 
         {this.state.set && (
@@ -30,11 +30,11 @@ class NewSetPage extends React.Component {
   }
 }
 
-NewSetPage.propTypes = {
+NewElementPage.propTypes = {
   createSet: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
 };
 
-export default connect(null, { createSet })(NewSetPage);
+export default connect(null, { createSet })(NewElementPage);

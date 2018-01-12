@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Menu, Input } from "semantic-ui-react";
 
-class DatagroupForm extends React.Component {
+class SetPanelForm extends React.Component {
   state = {
     keyword: "",
     loading: false
@@ -44,10 +44,10 @@ class DatagroupForm extends React.Component {
   }
 }
 
-DatagroupForm.propTypes = {
+SetPanelForm.propTypes = {
   setParam: PropTypes.func.isRequired,
   getParam: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired
 };
 
-export default DatagroupForm;
+export default SetPanelForm;

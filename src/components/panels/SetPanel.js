@@ -5,7 +5,7 @@ import { Menu, Segment } from "semantic-ui-react";
 import DatagroupTable from "../tabels/DatagroupTable";
 import ElementTable from "../tabels/ElementTable";
 import { searchSetChildren } from "../../actions/dataset";
-import DatagroupForm from "../forms/DatagroupForm";
+import SetPanelForm from "../forms/SetPanelForm";
 import { DATA_GROUP_TYPE, DATA_ELEMENT_TYPE } from "../../types";
 
 class DatasetPanel extends React.Component {
@@ -59,7 +59,7 @@ class DatasetPanel extends React.Component {
             active={param.activeItem === DATA_ELEMENT_TYPE}
             onClick={this.handleItemClick}
           />
-          <DatagroupForm
+          <SetPanelForm
             submit={this.searchSetChildren}
             setParam={this.setParam}
             getParam={this.getParam}
