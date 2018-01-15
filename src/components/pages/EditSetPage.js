@@ -2,21 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
-import AddSetForm from "../forms/AddSetForm";
+import SetForm from "../forms/SetForm";
 import * as action from "../../actions/sets";
+import { DATA_SET_TYPE } from "../../types";
 
 class EditSetPage extends React.Component {
   componentDidMount = () => this.onInit(this.props);
   onInit = props => props.fetchSet(props.activeRow);
   submit = data =>
-    this.props.save(data).then(() => this.props.history.push("/sets"));
+    this.props.saveSet(data).then(() => this.props.history.push("/sets"));
   render() {
-    const { data } = this.props;
+    const { activeRowdata } = this.props;
     return (
       <Grid columns={3}>
         <Grid.Row>
           <Grid.Column>
-            {data && <AddSetForm submit={this.submit} data={data} />}
+            {activeRowdata ? (
+              <SetForm
+                submit={this.submit}
+                data={activeRowdata}
+                type={DATA_SET_TYPE}
+              />
+            ) : (
+              <p>数据加载中。。。</p>
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -25,20 +34,18 @@ class EditSetPage extends React.Component {
 }
 
 EditSetPage.propTypes = {
-  save: PropTypes.func.isRequired,
+  saveSet: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
 };
 
 function mapStateToProps(state) {
   return {
     activeRow: { ID: state.sets.activeRow },
-    data: state.sets.activeRowData
+    activeRowdata: state.sets.activeRowData
   };
 }
 
-EditSetPage.propTypes = {
-  data: PropTypes.shape({}).isRequired
-};
+EditSetPage.propTypes = {};
 
 export default connect(mapStateToProps, {
   saveSet: action.saveSet,

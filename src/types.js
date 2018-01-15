@@ -11,6 +11,7 @@ export const NATIONAL = 0;
 export const ENTERPRISE = 1;
 export const SPECIAL = 0;
 export const COMMON = 1;
+export const UNCHECK = 0;
 export const SETS_FETCHED = "SETS_FETCHED";
 export const SET_CREATED = "SET_CREATED";
 export const SET_SELECTED = "SET_SELECTED";

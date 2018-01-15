@@ -5,47 +5,45 @@ import { Form, Dropdown } from "semantic-ui-react";
 
 class SearchSetForm extends React.Component {
   state = {
-    query: "",
-    laoding: false,
+    param: {
+      query: "",
+      limit: 100,
+      offset: 0
+    },
+    loading: false,
     options: [],
-    sets: {}
+    elements: {}
   };
   onSearchChange = (e, { searchQuery }) => {
     clearTimeout(this.timer);
     this.setState({
-      query: searchQuery
+      param: { ...this.state.param, query: searchQuery }
     });
     this.timer = setTimeout(this.fetchOptions, 1000);
   };
 
   onChange = (e, data) => {
-    this.setState({ query: data.value });
-    this.props.onSetSelect(this.state.sets[data.value]);
+    this.setState({ param: { ...this.state.param, query: data.value } });
+    this.props.onSetSelect(this.state.elements[data.value]);
   };
 
   fetchOptions = () => {
-    if (!this.state.query) return;
+    if (!this.state.param.query) return;
     this.setState({ loading: true });
-    axios
-      .post(
-        `/Dataset/search?keyword=${
-          this.state.query
-        }&standard=&stduy=&limit=10&offset=0`
-      )
-      .then(res => {
-        const options = [];
-        const setsHash = {};
-        const sets = res.data.rows;
-        sets.forEach(set => {
-          setsHash[set.ID] = set;
-          options.push({
-            key: set.ID,
-            value: set.ID,
-            text: set.DS_NAME
-          });
+    axios.post("/metadata/fetchMetas", this.state.param).then(res => {
+      const options = [];
+      const elementsHash = {};
+      const elements = res.data.rows;
+      elements.forEach(element => {
+        elementsHash[element.ID] = element;
+        options.push({
+          key: element.ID,
+          value: element.ID,
+          text: element.METADATA_NAME
         });
-        this.setState({ loading: false, options, sets: setsHash });
       });
+      this.setState({ loading: false, options, elements: elementsHash });
+    });
   };
   render() {
     return (
@@ -54,7 +52,7 @@ class SearchSetForm extends React.Component {
           search
           fluid
           placeholder="按名称搜索"
-          value={this.state.query}
+          value={this.state.param.query}
           onSearchChange={this.onSearchChange}
           options={this.state.options}
           loading={this.state.loading}

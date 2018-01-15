@@ -50,13 +50,15 @@ const fimalyFetched = data => ({
 
 // 根据参数param（分页条件）获取所有sets结果
 export const fetchSets = param => dispatch =>
-  api.set.fetchSets(param).then(sets => dispatch(setsFetched(sets)));
+  api.set
+    .fetchSets(param)
+    .then(({ rows, total }) => dispatch(setsFetched({ rows, total })));
 
 // 根据参数param（分页条件）某一set下的所有 数据组 和 数据元 结果
 export const fetchSetChildren = param => dispatch =>
   api.set
     .fetchSetChildren(param)
-    .then(children => dispatch(SetChildrenFetched(children)));
+    .then(({ rows, total }) => dispatch(SetChildrenFetched({ rows, total })));
 
 // 根据参数param（set对象）保存 某一 set
 export const saveSet = data => dispatch =>
@@ -64,7 +66,9 @@ export const saveSet = data => dispatch =>
 
 // 根据参数param（set对象的ID） 获取 某一 set 结果
 export const fetchSet = param => dispatch =>
-  api.set.fetchSet(param).then(set => dispatch(setFetched(set)));
+  api.set.fetchSet(param).then(set => {
+    dispatch(setFetched(set));
+  });
 
 // 获取数据集, 数据组, 数据元 的国标（flag=0），企标（flag=1），未审核(flag=0)，已审核(flag=1)数量（数量0不在结果中）
 export const fetchFimaly = param => dispatch =>

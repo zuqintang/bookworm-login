@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Label, Grid } from "semantic-ui-react";
 import SetPageForm from "../forms/SetPageForm";
-import SetTable from "../tabels/SetTable";
+import SetTable from "../tables/SetTable";
 import * as actions from "../../actions/sets";
 
 class SetPage extends React.Component {
@@ -11,7 +11,10 @@ class SetPage extends React.Component {
     data: { rows: [], total: 0 },
     activeRow: 0,
     param: {
-      standard: -1,
+      standard:
+        this.props.location.query == null
+          ? -1
+          : this.props.location.query.standard,
       study: -1,
       limit: 10,
       offset: 0,
@@ -29,7 +32,7 @@ class SetPage extends React.Component {
   getActiveRow = () => this.state.activeRow;
 
   submit = param =>
-    this.props.fetchSets(param).then(res => this.setState({ data: res }));
+    this.props.fetchSets(param).then(res => this.setState({ data: res.data }));
   handleContextRef = contextRef => this.setState({ contextRef });
 
   render() {
@@ -41,7 +44,11 @@ class SetPage extends React.Component {
             <Label as="a" color="teal" ribbon>
               筛选条件
             </Label>
-            <SetPageForm submit={this.submit} setParam={this.setParam} />
+            <SetPageForm
+              submit={this.submit}
+              setParam={this.setParam}
+              param={param}
+            />
           </Grid.Column>
           <Grid.Column width={16}>
             <SetTable

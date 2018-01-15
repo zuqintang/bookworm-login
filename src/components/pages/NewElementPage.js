@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Segment } from "semantic-ui-react";
 import SearchSetForm from "../forms/SearchSetForm";
-import SetForm from "../forms/SetForm";
+import ElementForm from "../forms/ElementForm";
 import { createSet } from "../../actions/sets";
 
 class NewElementPage extends React.Component {
   state = {
-    set: null
+    element: null
   };
 
-  onSetSelect = set => this.setState({ set });
+  onSetSelect = element => this.setState({ element });
 
-  addSet = set =>
-    this.props.createSet(set).then(() => this.props.history.push("/dashboard"));
+  addSet = element => this.props.createSet(element);
+  // .then(() => this.props.history.push("/dashboard"));
 
   render() {
     return (
@@ -22,8 +22,8 @@ class NewElementPage extends React.Component {
         <h4>添加新的数据元到数据集</h4>
         <SearchSetForm onSetSelect={this.onSetSelect} />
 
-        {this.state.set && (
-          <SetForm submit={this.addSet} set={this.state.set} />
+        {this.state.element && (
+          <ElementForm submit={this.addSet} element={this.state.element} />
         )}
       </Segment>
     );
@@ -31,10 +31,10 @@ class NewElementPage extends React.Component {
 }
 
 NewElementPage.propTypes = {
-  createSet: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired
+  createSet: PropTypes.func.isRequired
+  // history: PropTypes.shape({
+  //   push: PropTypes.func.isRequired
+  // }).isRequired
 };
 
 export default connect(null, { createSet })(NewElementPage);

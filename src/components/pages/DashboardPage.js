@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Card, Label, List, Statistic } from "semantic-ui-react";
 import { fetchFimaly } from "../../actions/sets";
+import { NATIONAL, ENTERPRISE, UNCHECK } from "../../types";
 
 class DashboardPage extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class DashboardPage extends React.Component {
     }
   };
   componentDidMount = () => this.onInit(this.props);
-  onInit = props => props.fetchDataFimaly();
+  onInit = props => props.fetchFimaly();
   render() {
     const { data } = this.props;
     return Object.keys(data).length === 0 ? (
@@ -33,7 +34,14 @@ class DashboardPage extends React.Component {
               <List divided relaxed>
                 <List.Item>
                   <List.Content>
-                    <List.Header as={Link} size="huge" to="/sets">
+                    <List.Header
+                      as={Link}
+                      size="huge"
+                      to={{
+                        pathname: "/sets",
+                        query: { standard: NATIONAL }
+                      }}
+                    >
                       <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.setStd.length === 2 && data.setStd[0].total}
@@ -48,7 +56,14 @@ class DashboardPage extends React.Component {
                 </List.Item>
                 <List.Item>
                   <List.Content>
-                    <List.Header as="a">
+                    <List.Header
+                      as={Link}
+                      size="huge"
+                      to={{
+                        pathname: "/sets",
+                        query: { standard: ENTERPRISE }
+                      }}
+                    >
                       <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.setStd.length === 2 && data.setStd[1].total}

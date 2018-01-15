@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
-import DatasetTable from "../tabels/DatasetTable";
+import DatasetTable from "../tables/SetTable";
 import NewElementPage from "./NewElementPage";
-import { search } from "../../actions/dataset";
-import * as actions from "../../actions/sets";
+import * as action from "../../actions/sets";
 
 class ElementOfSetPage extends React.Component {
   state = {
@@ -26,7 +25,7 @@ class ElementOfSetPage extends React.Component {
   };
   getActiveRow = () => this.state.activeRow;
   submit = param =>
-    this.props.search(param).then(res => this.setState({ data: res }));
+    this.props.fetchSets(param).then(res => this.setState({ data: res }));
   handleContextRef = contextRef => this.setState({ contextRef });
 
   render() {
@@ -34,17 +33,8 @@ class ElementOfSetPage extends React.Component {
     return (
       <Grid>
         <Grid.Row>
-          <Grid.Column width={8}>
+          <Grid.Column>
             <NewElementPage />
-          </Grid.Column>
-          <Grid.Column width={8}>
-            <DatasetTable
-              data={this.state.data}
-              submit={this.submit}
-              param={param}
-              setActiveRow={this.setActiveRow}
-              getActiveRow={this.getActiveRow}
-            />
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -52,10 +42,11 @@ class ElementOfSetPage extends React.Component {
   }
 }
 ElementOfSetPage.propTypes = {
-  search: PropTypes.func.isRequired,
+  fetchSets: PropTypes.func.isRequired,
   selectSet: PropTypes.func.isRequired
 };
 
-export default connect(null, { search, selectSet: actions.selectSet })(
-  ElementOfSetPage
-);
+export default connect(null, {
+  fetchSets: action.fetchSets,
+  selectSet: action.selectSet
+})(ElementOfSetPage);

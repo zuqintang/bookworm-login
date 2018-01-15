@@ -20,6 +20,8 @@ class SetPageForm extends React.Component {
     data: { standard: -1, study: -1, keyword: "", limit: 10, offset: 0 },
     loading: false
   };
+  componentDidMount = () => this.onInit(this.props);
+  onInit = props => this.setState({ data: props.param });
   onSubmit = () => {
     this.setState({ loading: true });
     const searchParam = this.state.data;

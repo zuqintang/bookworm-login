@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Menu, Segment } from "semantic-ui-react";
-import DatagroupTable from "../tabels/DatagroupTable";
-import ElementTable from "../tabels/ElementTable";
-import { searchSetChildren } from "../../actions/dataset";
+import DatagroupTable from "../tables/GroupTable";
+import ElementTable from "../tables/ElementTable";
+import { fetchSetChildren } from "../../actions/sets";
 import SetPanelForm from "../forms/SetPanelForm";
 import { DATA_GROUP_TYPE, DATA_ELEMENT_TYPE } from "../../types";
 
@@ -28,15 +28,14 @@ class DatasetPanel extends React.Component {
     this.setState({
       param: { ...this.state.param, activeItem: id }
     });
-  searchSetChildren = param =>
-    this.props.searchSetChildren(param).then(res => {
+  fetchSetChildren = param =>
+    this.props.fetchSetChildren(param).then(res => {
       if (param.activeItem === 1) {
-        this.setState({ data: { ...this.state.data, group: res } });
+        this.setState({ data: { ...this.state.data, group: res.data } });
       } else {
-        this.setState({ data: { ...this.state.data, element: res } });
+        this.setState({ data: { ...this.state.data, element: res.data } });
       }
     });
-
   render() {
     const { data, param } = this.state;
     return (
@@ -60,7 +59,7 @@ class DatasetPanel extends React.Component {
             onClick={this.handleItemClick}
           />
           <SetPanelForm
-            submit={this.searchSetChildren}
+            submit={this.fetchSetChildren}
             setParam={this.setParam}
             getParam={this.getParam}
           />
@@ -68,14 +67,14 @@ class DatasetPanel extends React.Component {
         <Segment attached="bottom">
           {param.activeItem === DATA_GROUP_TYPE && (
             <DatagroupTable
-              submit={this.searchSetChildren}
+              submit={this.fetchSetChildren}
               getParam={this.getParam}
               data={data.group}
             />
           )}
           {param.activeItem === DATA_ELEMENT_TYPE && (
             <ElementTable
-              submit={this.searchSetChildren}
+              submit={this.fetchSetChildren}
               getParam={this.getParam}
               data={data.element}
             />
@@ -87,8 +86,8 @@ class DatasetPanel extends React.Component {
 }
 
 DatasetPanel.propTypes = {
-  searchSetChildren: PropTypes.func.isRequired,
+  fetchSetChildren: PropTypes.func.isRequired,
   getActiveRow: PropTypes.func.isRequired
 };
 
-export default connect(null, { searchSetChildren })(DatasetPanel);
+export default connect(null, { fetchSetChildren })(DatasetPanel);
