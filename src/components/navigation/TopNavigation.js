@@ -14,7 +14,7 @@ const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
     {!hasSet &&
       !selectSet && (
         <Menu.Item as={Link} to="/sets/new">
-          新增数据集
+          新增
         </Menu.Item>
       )}
     {!hasSet &&
@@ -49,7 +49,7 @@ const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
       )}
     {selectSet && (
       <Menu.Item as={Link} to="/sets/edit">
-        修改数据集
+        修改
       </Menu.Item>
     )}
     {selectSet && (

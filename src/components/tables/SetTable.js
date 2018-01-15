@@ -29,7 +29,7 @@ class SetTable extends React.Component {
             <Table celled selectable stackable compact="very">
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>数据集名称</Table.HeaderCell>
+                  <Table.HeaderCell>名称</Table.HeaderCell>
                   <Table.HeaderCell>编码</Table.HeaderCell>
                   <Table.HeaderCell>来源</Table.HeaderCell>
                   <Table.HeaderCell>所属学科</Table.HeaderCell>

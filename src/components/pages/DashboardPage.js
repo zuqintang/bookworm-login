@@ -106,7 +106,14 @@ class DashboardPage extends React.Component {
               <List divided relaxed>
                 <List.Item>
                   <List.Content>
-                    <List.Header as={Link} to="/groups" size="huge">
+                    <List.Header
+                      as={Link}
+                      size="huge"
+                      to={{
+                        pathname: "/groups",
+                        query: { standard: NATIONAL }
+                      }}
+                    >
                       <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.groupStd.length === 2 && data.groupStd[0].total}
@@ -123,7 +130,14 @@ class DashboardPage extends React.Component {
                 </List.Item>
                 <List.Item>
                   <List.Content>
-                    <List.Header as="a">
+                    <List.Header
+                      as={Link}
+                      size="huge"
+                      to={{
+                        pathname: "/groups",
+                        query: { standard: ENTERPRISE }
+                      }}
+                    >
                       <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.groupStd.length === 2 && data.groupStd[1].total}

@@ -5,9 +5,9 @@ import { Label, Grid } from "semantic-ui-react";
 import SetPageForm from "../forms/SetPageForm";
 import SetTable from "../tables/SetTable";
 import * as actions from "../../actions/sets";
-import { DATA_SET_TYPE } from "../../types";
+import { DATA_GROUP_TYPE } from "../../types";
 
-class SetPage extends React.Component {
+class GroupPage extends React.Component {
   state = {
     data: { rows: [], total: 0 },
     activeRow: 0,
@@ -20,7 +20,7 @@ class SetPage extends React.Component {
       limit: 10,
       offset: 0,
       keyword: "",
-      DATA_SET_TYPE
+      DATA_SET_TYPE: DATA_GROUP_TYPE
     }
   };
   componentDidMount = () => this.onInit(this.state.param);
@@ -66,7 +66,7 @@ class SetPage extends React.Component {
     );
   }
 }
-SetPage.propTypes = {
+GroupPage.propTypes = {
   fetchSets: PropTypes.func.isRequired,
   selectSet: PropTypes.func.isRequired
 };
@@ -74,4 +74,4 @@ SetPage.propTypes = {
 export default connect(null, {
   fetchSets: actions.fetchSets,
   selectSet: actions.selectSet
-})(SetPage);
+})(GroupPage);

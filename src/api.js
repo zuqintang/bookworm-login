@@ -9,7 +9,7 @@ export default {
   },
   set: {
     fetchSets: param =>
-      axios.post("/set/fetchSets", qs.stringify(param)).then(res => res.data),
+      axios.post("/set/fetchSets", param).then(res => res.data),
     fetchSetChildren: param =>
       axios
         .post("/set/fetchSetChildren", qs.stringify(param), {
