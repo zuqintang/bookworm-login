@@ -180,7 +180,14 @@ class DashboardPage extends React.Component {
               <List divided relaxed>
                 <List.Item>
                   <List.Content>
-                    <List.Header as={Link} size="huge" to="/elments">
+                    <List.Header
+                      as={Link}
+                      size="huge"
+                      to={{
+                        pathname: "/elements",
+                        query: { standard: NATIONAL }
+                      }}
+                    >
                       <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.metaStd.length === 2 && data.metaStd[0].total}

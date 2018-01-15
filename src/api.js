@@ -37,5 +37,9 @@ export default {
     fetchFimaly: () =>
       axios.post("/statistic/fetchFimaly").then(res => res.data.rows),
     createSet: sets => axios.post("/api/books", sets).then(res => res.data.rows)
+  },
+  metadata: {
+    fetchElements: param =>
+      axios.post("/metadata/fetchMetas", param).then(res => res.data)
   }
 };

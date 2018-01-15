@@ -13,6 +13,7 @@ import GroupOfSetPage from "./components/pages/GroupOfSetPage";
 import GroupPage from "./components/pages/GroupPage";
 import ElementOfSetPage from "./components/pages/ElementOfSetPage";
 import NewGroupPage from "./components/pages/NewGroupPage";
+import ElementPage from "./components/pages/ElementPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
@@ -66,6 +67,12 @@ const App = ({ location, isAuthenticated }) => (
       component={NewGroupPage}
     />
     <UserRoute location={location} path="/groups" exact component={GroupPage} />
+    <UserRoute
+      location={location}
+      path="/elements"
+      exact
+      component={ElementPage}
+    />
   </div>
 );
 
