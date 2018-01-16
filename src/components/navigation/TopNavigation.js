@@ -6,43 +6,43 @@ import { Link } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
 import * as action from "../../actions/auth";
 
-const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
+const TopNavigation = ({ user, logout, selectSet, selectElement }) => (
   <Menu secondary pointing>
     <Menu.Item as={Link} to="/dashboard">
       首页
     </Menu.Item>
-    {!hasSet &&
-      !selectSet && (
+    {!selectSet &&
+      !selectElement && (
         <Menu.Item as={Link} to="/sets/new">
           新增
         </Menu.Item>
       )}
-    {!hasSet &&
-      !selectSet && (
+    {!selectSet &&
+      !selectElement && (
         <Menu.Item as={Link} to="/sets/new">
           检索与导出
         </Menu.Item>
       )}
-    {!hasSet &&
-      !selectSet && (
+    {!selectSet &&
+      !selectElement && (
         <Menu.Item as={Link} to="/sets/new">
           同义元映射
         </Menu.Item>
       )}
-    {!hasSet &&
-      !selectSet && (
+    {!selectSet &&
+      !selectElement && (
         <Menu.Item as={Link} to="/sets/new">
           概念域后关联
         </Menu.Item>
       )}
-    {!hasSet &&
-      !selectSet && (
+    {!selectSet &&
+      !selectElement && (
         <Menu.Item as={Link} to="/sets/new">
           EPM数据同步
         </Menu.Item>
       )}
-    {!hasSet &&
-      !selectSet && (
+    {!selectSet &&
+      !selectElement && (
         <Menu.Item as={Link} to="/sets/new">
           引用查询
         </Menu.Item>
@@ -72,6 +72,11 @@ const TopNavigation = ({ user, logout, hasSet, selectSet }) => (
         添加数据元
       </Menu.Item>
     )}
+    {selectElement && (
+      <Menu.Item as={Link} to="/elements/new">
+        新增
+      </Menu.Item>
+    )}
     <Menu.Menu position="right">
       <Dropdown
         trigger={<Image avatar src={gravatarUrl(`${user.username}@cde.com`)} />}
@@ -88,7 +93,6 @@ TopNavigation.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string.isRequired
   }).isRequired,
-  hasSet: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
   selectSet: PropTypes.bool.isRequired
 };
@@ -96,8 +100,8 @@ TopNavigation.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    hasSet: !!state.hasSet,
-    selectSet: !!state.sets.activeRow
+    selectSet: !!state.sets.activeRow,
+    selectElement: !!state.elements.activeRow
   };
 }
 

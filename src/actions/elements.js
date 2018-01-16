@@ -4,7 +4,9 @@ import {
   ELEMENT_FETCHED,
   ELEMENT_CANCELSELECTED,
   ELEMENT_SAVED,
-  FIMALY_FETCHED
+  FIMALY_FETCHED,
+  FIELDCODE_FETCHED,
+  OPTION_FETCHED
 } from "../types";
 import api from "../api";
 
@@ -12,11 +14,6 @@ const elementsFetched = data => ({
   type: ELEMENTS_FETCHED,
   data
 });
-
-// const elementCreated = data => ({
-//   type: ELEMENT_CREATED,
-//   data
-// });
 
 const elementSelected = data => ({
   type: ELEMENT_SELECTED,
@@ -29,6 +26,15 @@ const elementFetched = data => ({
 
 const elementCancelSelected = () => ({
   type: ELEMENT_CANCELSELECTED
+});
+
+const fieldcodeFetched = data => ({
+  type: FIELDCODE_FETCHED,
+  data
+});
+const optionFetched = data => ({
+  type: OPTION_FETCHED,
+  data
 });
 
 const elementSaved = data => ({
@@ -46,7 +52,17 @@ export const fetchElements = param => dispatch =>
     .fetchElements(param)
     .then(({ rows, total }) => dispatch(elementsFetched({ rows, total })));
 
-// 根据参数param（分页条件）某一ELEMENT下的所有 数据组 和 数据元 结果
+// 根据参数param（分页条件）某一Element下的所有 值域
+export const fetchFieldcode = param => dispatch =>
+  api.metadata
+    .fetchFieldcode(param)
+    .then(({ rows, total }) => dispatch(fieldcodeFetched({ rows, total })));
+
+// 根据参数param（分页条件）某一Element下的所有 值域项 结果
+export const fetchOption = param => dispatch =>
+  api.metadata
+    .fetchOption(param)
+    .then(({ rows, total }) => dispatch(optionFetched({ rows, total })));
 
 // 根据参数param（ELEMENT对象）保存 某一 ELEMENT
 export const saveElement = data => dispatch =>

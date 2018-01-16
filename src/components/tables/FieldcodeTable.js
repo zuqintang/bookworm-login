@@ -1,22 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Table, Dimmer, Loader } from "semantic-ui-react";
+import FieldcodeRows from "../rows/FieldcodeRows";
 import Paginator from "../tools/Paginator";
-import ElementRows from "../rows/ElementRows";
 
-class ElementTable extends React.Component {
-  state = { data: { rows: [] }, active: false };
+class FieldcodeTable extends React.Component {
+  state = { activeRow: 0, data: { rows: [] }, active: false };
+  componentDidMount = () => this.onInit();
+  onInit = () => this.search(this.props.getParam());
+  getActiveRow = () => {
+    const activeRowID = this.state.activeRow;
+    return activeRowID;
+  };
   search = searchParam => {
     this.setState({ active: true });
     this.props.submit(searchParam).then(() => this.setState({ active: false }));
   };
   handleRowClick = e => {
     const activeRowID = parseInt(e.target.name, 10);
-    if (this.props.getActiveRow() === activeRowID) this.props.setActiveRow(0);
-    else this.props.setActiveRow(activeRowID);
+    if (this.state.activeRow === activeRowID) this.setState({ activeRow: 0 });
+    else this.setState({ activeRow: activeRowID });
   };
   render() {
-    const { active } = this.state;
+    const { active, activeRow } = this.state;
     const { data } = this.props;
     const param = this.props.getParam();
     return (
@@ -27,9 +32,8 @@ class ElementTable extends React.Component {
         <Table celled selectable stackable compact="very">
           <Table.Header>
             <Table.Row textAlign="center">
-              <Table.HeaderCell>数据元编码</Table.HeaderCell>
-              <Table.HeaderCell>数据元名称</Table.HeaderCell>
-              <Table.HeaderCell>数据类型</Table.HeaderCell>
+              <Table.HeaderCell>唯一标识</Table.HeaderCell>
+              <Table.HeaderCell>值域名称</Table.HeaderCell>
               <Table.HeaderCell>创建日期</Table.HeaderCell>
               <Table.HeaderCell>创建人</Table.HeaderCell>
               <Table.HeaderCell>来源</Table.HeaderCell>
@@ -37,10 +41,11 @@ class ElementTable extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <ElementRows
+            <FieldcodeRows
               data={data.rows}
+              activeRow={activeRow}
               handleRowClick={this.handleRowClick}
-              getActiveRow={this.props.getActiveRow}
+              getActiveRow={this.getActiveRow}
             />
           </Table.Body>
           <Table.Footer>
@@ -60,13 +65,4 @@ class ElementTable extends React.Component {
   }
 }
 
-ElementTable.propTypes = {
-  submit: PropTypes.func.isRequired,
-  data: PropTypes.shape({
-    total: PropTypes.number.isRequired,
-    rows: PropTypes.array.isRequired
-  }).isRequired,
-  getParam: PropTypes.func.isRequired
-};
-
-export default ElementTable;
+export default FieldcodeTable;

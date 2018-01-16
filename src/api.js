@@ -40,6 +40,10 @@ export default {
   },
   metadata: {
     fetchElements: param =>
-      axios.post("/metadata/fetchMetas", param).then(res => res.data)
+      axios.post("/metadata/fetchMetas", param).then(res => res.data),
+    fetchFieldcode: param =>
+      axios.post("/metadata/fetchField", param).then(res => res.data),
+    fetchOption: param =>
+      axios.post("/metadata/fetchOption", param).then(res => res.data)
   }
 };

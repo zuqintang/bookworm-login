@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Card, Label, List, Statistic } from "semantic-ui-react";
 import { fetchFimaly } from "../../actions/sets";
-import { NATIONAL, ENTERPRISE, UNCHECK } from "../../types";
+import { NATIONAL, ENTERPRISE } from "../../types";
 
 class DashboardPage extends React.Component {
   state = {
@@ -202,7 +202,14 @@ class DashboardPage extends React.Component {
                 </List.Item>
                 <List.Item>
                   <List.Content>
-                    <List.Header as="a">
+                    <List.Header
+                      as={Link}
+                      size="huge"
+                      to={{
+                        pathname: "/elements",
+                        query: { standard: ENTERPRISE }
+                      }}
+                    >
                       <Statistic size="small" horizontal>
                         <Statistic.Value>
                           {data.metaStd.length === 2 && data.metaStd[1].total}

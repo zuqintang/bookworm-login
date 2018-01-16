@@ -5,10 +5,10 @@ import { Menu, Segment } from "semantic-ui-react";
 import DatagroupTable from "../tables/GroupTable";
 import ElementTable from "../tables/ElementTable";
 import { fetchSetChildren } from "../../actions/sets";
-import SetPanelForm from "../forms/SetPanelForm";
+import PanelForm from "../forms/PanelForm";
 import { DATA_GROUP_TYPE, DATA_ELEMENT_TYPE } from "../../types";
 
-class DatasetPanel extends React.Component {
+class SetPanel extends React.Component {
   state = {
     param: {
       limit: 10,
@@ -58,7 +58,7 @@ class DatasetPanel extends React.Component {
             active={param.activeItem === DATA_ELEMENT_TYPE}
             onClick={this.handleItemClick}
           />
-          <SetPanelForm
+          <PanelForm
             submit={this.fetchSetChildren}
             setParam={this.setParam}
             getParam={this.getParam}
@@ -76,6 +76,7 @@ class DatasetPanel extends React.Component {
             <ElementTable
               submit={this.fetchSetChildren}
               getParam={this.getParam}
+              getActiveRow={this.props.getActiveRow}
               data={data.element}
             />
           )}
@@ -85,9 +86,9 @@ class DatasetPanel extends React.Component {
   }
 }
 
-DatasetPanel.propTypes = {
+SetPanel.propTypes = {
   fetchSetChildren: PropTypes.func.isRequired,
   getActiveRow: PropTypes.func.isRequired
 };
 
-export default connect(null, { fetchSetChildren })(DatasetPanel);
+export default connect(null, { fetchSetChildren })(SetPanel);

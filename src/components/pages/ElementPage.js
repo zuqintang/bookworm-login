@@ -18,7 +18,7 @@ class SetPage extends React.Component {
       study: -1,
       limit: 10,
       offset: 0,
-      keyword: ""
+      query: ""
     }
   };
   componentDidMount = () => this.onInit(this.state.param);
@@ -69,7 +69,12 @@ class SetPage extends React.Component {
 }
 SetPage.propTypes = {
   fetchElements: PropTypes.func.isRequired,
-  selectElement: PropTypes.func.isRequired
+  selectElement: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      standard: PropTypes.number.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default connect(null, {

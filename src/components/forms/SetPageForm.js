@@ -17,7 +17,7 @@ const studyOptions = [
 
 class SetPageForm extends React.Component {
   state = {
-    data: { standard: -1, study: -1, keyword: "", limit: 10, offset: 0 },
+    data: { standard: -1, study: -1, query: "", limit: 10, offset: 0 },
     loading: false
   };
   componentDidMount = () => this.onInit(this.props);
@@ -75,9 +75,9 @@ class SetPageForm extends React.Component {
             onChange={this.handleStudyChange}
           />
           <Form.Input
-            name="keyword"
+            name="query"
             placeholder="搜索..."
-            value={data.keyword}
+            value={data.query}
             onChange={this.handleInputChange}
           />
           <Form.Button size="mini">检索</Form.Button>

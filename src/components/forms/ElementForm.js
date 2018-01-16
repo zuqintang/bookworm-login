@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Button, Grid, Segment } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
-import OptionTable from "../tables/OptionTable";
+import ElementPanel from "../panels/ElementPanel";
 
 class ElementForm extends React.Component {
   state = {
@@ -17,7 +17,6 @@ class ElementForm extends React.Component {
       data: props.element
     });
   }
-
   onChange = e =>
     this.setState({
       ...this.state,
@@ -37,6 +36,7 @@ class ElementForm extends React.Component {
         );
     }
   };
+  getActiveRow = () => this.props.element.ID;
 
   validate = data => {
     const errors = {};
@@ -60,6 +60,7 @@ class ElementForm extends React.Component {
                 id="METADATA_NAME"
                 name="METADATA_NAME"
                 placeholder="Title"
+                hover={data.METADATA_NAME}
                 value={data.METADATA_NAME}
                 onChange={this.onChange}
               />
@@ -214,7 +215,7 @@ class ElementForm extends React.Component {
               />
               {errors.CREATE_DATE && <InlineError text={errors.CREATE_DATE} />}
             </Form.Field>
-            <OptionTable />
+            <ElementPanel getActiveRow={this.getActiveRow} />
 
             <Grid.Row>
               <Button primary>添加</Button>

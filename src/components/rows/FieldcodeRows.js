@@ -1,34 +1,31 @@
 import React from "react";
 import { Table, Label, List } from "semantic-ui-react";
 import { FormatStandard } from "../tools/Formater";
-import ElementPanel from "../panels/ElementPanel";
+import OptionPanel from "../panels/OptionPanel";
 
-function ElementRows(props) {
+function FieldcodeRows(props) {
   const rows = props.data;
   const activeRow = props.getActiveRow();
   const getActiveRow = props.getActiveRow;
-  const elementRows = rows.map(row => (
+  const fieldcodeRows = rows.map(row => (
     <Table.Row key={row.ID}>
       {activeRow !== row.ID && (
         <Table.Cell>
           <Label as="a" name={row.ID} onClick={props.handleRowClick}>
-            {row.METADATA_IDENTIFY}
+            {row.FIELDCODE_TABLECODE}
           </Label>
         </Table.Cell>
       )}
       {activeRow !== row.ID && (
         <Table.Cell>
           <Label as="a" name={row.ID} onClick={props.handleRowClick}>
-            {row.METADATA_NAME}
+            {row.FIELDCODE_NAME}
           </Label>
         </Table.Cell>
       )}
-      {activeRow !== row.ID && (
-        <Table.Cell>{row.DATA_META_DATATYPE}</Table.Cell>
-      )}
       {activeRow !== row.ID && <Table.Cell>{row.CREATE_DATE}</Table.Cell>}
       {activeRow !== row.ID && <Table.Cell>{row.CREATE_MAN}</Table.Cell>}
-      {activeRow !== row.ID && <Table.Cell>{row.DATAMETA_FROM}</Table.Cell>}
+      {activeRow !== row.ID && <Table.Cell>{row.FIELD_FROM}</Table.Cell>}
       {activeRow !== row.ID && (
         <Table.Cell>{FormatStandard(row.STANDARD)}</Table.Cell>
       )}
@@ -41,20 +38,14 @@ function ElementRows(props) {
             color="teal"
             ribbon
           >
-            {row.METADATA_NAME}
+            {row.FIELDCODE_NAME}
           </Label>
           <List divided selection>
             <List.Item>
               <Label color="blue" horizontal>
                 编码
               </Label>
-              {row.METADATA_IDENTIFY}
-            </List.Item>
-            <List.Item>
-              <Label color="blue" horizontal>
-                数据类型
-              </Label>
-              {row.DATA_META_DATATYPE}
+              {row.FIELDCODE_TABLECODE}
             </List.Item>
             <List.Item>
               <Label color="blue" horizontal>
@@ -72,7 +63,7 @@ function ElementRows(props) {
               <Label color="blue" horizontal>
                 来源
               </Label>
-              {row.DATAMETA_FROM}
+              {row.FIELD_FROM}
             </List.Item>
             <List.Item>
               <Label color="blue" horizontal>
@@ -85,12 +76,12 @@ function ElementRows(props) {
       )}
       {activeRow === row.ID && (
         <Table.Cell colSpan={6}>
-          <ElementPanel getActiveRow={getActiveRow} />
+          <OptionPanel getActiveRow={getActiveRow} />
         </Table.Cell>
       )}
     </Table.Row>
   ));
-  return elementRows;
+  return fieldcodeRows;
 }
 
-export default ElementRows;
+export default FieldcodeRows;
