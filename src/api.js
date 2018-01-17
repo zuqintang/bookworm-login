@@ -11,13 +11,7 @@ export default {
     fetchSets: param =>
       axios.post("/set/fetchSets", param).then(res => res.data),
     fetchSetChildren: param =>
-      axios
-        .post("/set/fetchSetChildren", qs.stringify(param), {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-          }
-        })
-        .then(res => res.data),
+      axios.post("/set/fetchSetChildren", param).then(res => res.data),
     saveSet: param =>
       axios
         .post("/set/saveSet", qs.stringify(param), {
@@ -43,6 +37,8 @@ export default {
       axios.post("/metadata/fetchMetas", param).then(res => res.data),
     fetchFieldcode: param =>
       axios.post("/metadata/fetchField", param).then(res => res.data),
+    fetchFieldcodes: param =>
+      axios.post("/metadata/fetchFieldcodes", param).then(res => res.data),
     fetchOption: param =>
       axios.post("/metadata/fetchOption", param).then(res => res.data)
   }

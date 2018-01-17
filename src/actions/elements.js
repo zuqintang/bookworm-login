@@ -6,6 +6,7 @@ import {
   ELEMENT_SAVED,
   FIMALY_FETCHED,
   FIELDCODE_FETCHED,
+  FIELDCODES_FETCHED,
   OPTION_FETCHED
 } from "../types";
 import api from "../api";
@@ -32,6 +33,12 @@ const fieldcodeFetched = data => ({
   type: FIELDCODE_FETCHED,
   data
 });
+
+const fieldcodesFetched = data => ({
+  type: FIELDCODES_FETCHED,
+  data
+});
+
 const optionFetched = data => ({
   type: OPTION_FETCHED,
   data
@@ -57,6 +64,12 @@ export const fetchFieldcode = param => dispatch =>
   api.metadata
     .fetchFieldcode(param)
     .then(({ rows, total }) => dispatch(fieldcodeFetched({ rows, total })));
+
+// 根据参数param（分页条件）所有 值域
+export const fetchFieldcodes = param => dispatch =>
+  api.metadata
+    .fetchFieldcodes(param)
+    .then(({ rows, total }) => dispatch(fieldcodesFetched({ rows, total })));
 
 // 根据参数param（分页条件）某一Element下的所有 值域项 结果
 export const fetchOption = param => dispatch =>

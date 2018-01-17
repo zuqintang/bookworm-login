@@ -14,7 +14,7 @@ import GroupPage from "./components/pages/GroupPage";
 import ElementOfSetPage from "./components/pages/ElementOfSetPage";
 import NewGroupPage from "./components/pages/NewGroupPage";
 import ElementPage from "./components/pages/ElementPage";
-import NewElementPage from "./components/pages/NewElementPage";
+import NewMetaDataPage from "./components/pages/NewMetaDataPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
@@ -78,7 +78,7 @@ const App = ({ location, isAuthenticated }) => (
       location={location}
       path="/elements/new"
       exact
-      component={NewElementPage}
+      component={NewMetaDataPage}
     />
   </div>
 );

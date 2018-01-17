@@ -12,7 +12,8 @@ class ElementTable extends React.Component {
   };
   handleRowClick = e => {
     const activeRowID = parseInt(e.target.name, 10);
-    if (this.props.getActiveRow() === activeRowID) this.props.setActiveRow(0);
+    if (this.props.getActiveRow() && this.props.getActiveRow() === activeRowID)
+      this.props.setActiveRow(0);
     else this.props.setActiveRow(activeRowID);
   };
   render() {

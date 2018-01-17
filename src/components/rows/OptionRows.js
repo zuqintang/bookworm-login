@@ -6,9 +6,9 @@ function OptionRows(props) {
   const rows = props.data;
   const optionRows = rows.map(row => (
     <Table.Row key={row.ID}>
-      <Table.Cell>{row.FIELDCODE_TABLECODE}</Table.Cell>
-      <Table.Cell>{row.FIELDCODE_VALUE}</Table.Cell>
       <Table.Cell>{row.FIELDCODE_VALUE_CN_NAME}</Table.Cell>
+      <Table.Cell>{row.FIELDCODE_VALUE}</Table.Cell>
+      <Table.Cell>{row.FIELD_COMPUTE}</Table.Cell>
       <Table.Cell>{row.FIELDORDER}</Table.Cell>
       <Table.Cell>{row.CREATE_MAN}</Table.Cell>
       <Table.Cell>{row.CREATE_DATE}</Table.Cell>

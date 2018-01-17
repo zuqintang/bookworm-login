@@ -17,6 +17,7 @@ class SetPanel extends React.Component {
       datasetID: this.props.getActiveRow() || 0,
       activeItem: DATA_GROUP_TYPE
     },
+    activeRow: 0,
     data: { group: { total: 0, rows: [] }, element: { total: 0, rows: [] } }
   };
   setParam = param => this.setState({ param });
@@ -24,6 +25,8 @@ class SetPanel extends React.Component {
     const param = this.state.param;
     return param;
   };
+  setActiveRow = activeRow => this.setState({ activeRow });
+  getActiveRow = () => this.state.activeRow;
   handleItemClick = (e, { id }) =>
     this.setState({
       param: { ...this.state.param, activeItem: id }
@@ -74,10 +77,12 @@ class SetPanel extends React.Component {
           )}
           {param.activeItem === DATA_ELEMENT_TYPE && (
             <ElementTable
-              submit={this.fetchSetChildren}
-              getParam={this.getParam}
-              getActiveRow={this.props.getActiveRow}
               data={data.element}
+              submit={this.fetchSetChildren}
+              param={param}
+              getParam={this.getParam}
+              setActiveRow={this.setActiveRow}
+              getActiveRow={this.getActiveRow}
             />
           )}
         </Segment>

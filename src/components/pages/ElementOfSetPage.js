@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
-import DatasetTable from "../tables/SetTable";
 import NewElementPage from "./NewElementPage";
 import * as action from "../../actions/sets";
 
@@ -29,7 +28,6 @@ class ElementOfSetPage extends React.Component {
   handleContextRef = contextRef => this.setState({ contextRef });
 
   render() {
-    const { param } = this.state;
     return (
       <Grid>
         <Grid.Row>

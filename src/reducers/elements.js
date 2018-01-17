@@ -1,4 +1,3 @@
-import { createSelector } from "reselect";
 import {
   ELEMENTS_FETCHED,
   ELEMENT_CREATED,
