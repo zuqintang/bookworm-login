@@ -12,7 +12,7 @@ export const userLoggedOut = () => ({
 
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
-    localStorage.cdejwt = user.realname;
+    localStorage.cdejwt = user.username;
     dispatch(userLoggedIn(user));
   });
 

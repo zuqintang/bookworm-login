@@ -45,7 +45,7 @@ class DashboardPage extends React.Component {
                             query: { standard: NATIONAL }
                           }}
                         >
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="olive">
                             <Statistic.Value>
                               {data.setStd.length === 2 && data.setStd[0].total}
                               {data.setStd.length === 1 &&
@@ -67,7 +67,7 @@ class DashboardPage extends React.Component {
                             query: { standard: ENTERPRISE }
                           }}
                         >
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="teal">
                             <Statistic.Value>
                               {data.setStd.length === 2 && data.setStd[1].total}
                               {data.setStd.length === 1 &&
@@ -84,7 +84,7 @@ class DashboardPage extends React.Component {
                     <List.Item>
                       <List.Content>
                         <List.Header as="a">
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="orange">
                             <Statistic.Value>
                               {data.setStu.length === 2 && data.setStu[0].total}
                               {data.setStu.length === 1 &&
@@ -100,7 +100,7 @@ class DashboardPage extends React.Component {
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="blue">
+            <Card color="yellow">
               <Card.Content>
                 <Label corner="right" as="a" icon="block layout" />
                 <Card.Header>数据组</Card.Header>
@@ -117,7 +117,7 @@ class DashboardPage extends React.Component {
                             query: { standard: NATIONAL }
                           }}
                         >
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="olive">
                             <Statistic.Value>
                               {data.groupStd.length === 2 &&
                                 data.groupStd[0].total}
@@ -142,7 +142,7 @@ class DashboardPage extends React.Component {
                             query: { standard: ENTERPRISE }
                           }}
                         >
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="teal">
                             <Statistic.Value>
                               {data.groupStd.length === 2 &&
                                 data.groupStd[1].total}
@@ -160,7 +160,7 @@ class DashboardPage extends React.Component {
                     <List.Item>
                       <List.Content>
                         <List.Header as="a">
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="orange">
                             <Statistic.Value>
                               {data.groupStu.length === 2 &&
                                 data.groupStu[0].total}
@@ -177,7 +177,7 @@ class DashboardPage extends React.Component {
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="blue">
+            <Card color="orange">
               <Card.Content>
                 <Label corner="right" as="a" icon="stop" />
                 <Card.Header>数据元</Card.Header>
@@ -194,7 +194,7 @@ class DashboardPage extends React.Component {
                             query: { standard: NATIONAL }
                           }}
                         >
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="olive">
                             <Statistic.Value>
                               {data.metaStd.length === 2 &&
                                 data.metaStd[0].total}
@@ -217,7 +217,7 @@ class DashboardPage extends React.Component {
                             query: { standard: ENTERPRISE }
                           }}
                         >
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="teal">
                             <Statistic.Value>
                               {data.metaStd.length === 2 &&
                                 data.metaStd[1].total}
@@ -233,7 +233,7 @@ class DashboardPage extends React.Component {
                     <List.Item>
                       <List.Content>
                         <List.Header as="a">
-                          <Statistic size="small" horizontal>
+                          <Statistic size="small" horizontal color="orange">
                             <Statistic.Value>
                               {data.metaStu.length === 2 &&
                                 data.metaStu[0].total}
