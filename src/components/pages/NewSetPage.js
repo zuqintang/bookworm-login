@@ -8,7 +8,7 @@ import { DATA_SET_TYPE } from "../../types";
 
 class NewSetPage extends React.Component {
   submit = data =>
-    this.props.saveSet(data).then(() => this.props.history.push("/sets"));
+    this.props.saveSet(data).then(() => this.props.history.push("/dashboard"));
 
   render() {
     return (

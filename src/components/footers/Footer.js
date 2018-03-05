@@ -30,10 +30,10 @@ const Footer = () => (
           <Grid.Column width={3}>
             <Header as="h4" content="其他系统" />
             <List link>
-              <List.Item as="a" href="http://192.168.2.143/CDE" target="_blank">
+              <List.Item as="a" href="http://127.0.0.1:8080/home.html#/editor_index " target="_blank">
                 CRF
               </List.Item>
-              <List.Item as="a">EDC</List.Item>
+              <List.Item as="a" href="http://127.0.0.1:8080/login.html" target="_blank">EDC</List.Item>
               <List.Item as="a">EMR</List.Item>
               <List.Item as="a">样本库</List.Item>
             </List>

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
+import MaintainFlow from "./components/flows/MaintainFlow";
 import LoginPage from "./components/pages/LoginPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import SignupPage from "./components/pages/SignupPage";
@@ -35,6 +36,12 @@ const App = ({ location, isAuthenticated }) => (
       path="/dashboard"
       exact
       component={DashboardPage}
+    />
+    <UserRoute
+      location={location}
+      path="/maintain"
+      exact
+      component={MaintainFlow}
     />
     <UserRoute location={location} path="/sets" exact component={SetPage} />
     <UserRoute
@@ -92,7 +99,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.user.username
+    isAuthenticated: !!state.user.realname
   };
 }
 

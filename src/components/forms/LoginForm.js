@@ -83,7 +83,12 @@ class LoginForm extends React.Component {
             />
             {errors.password && <InlineError text={errors.password} />}
             <Form.Group>
-              <Form.Checkbox label="记住密码" inverted="true" color="grey" />
+              <Form.Checkbox
+                label="记住密码"
+                inverted="true"
+                color="grey"
+                checked
+              />
             </Form.Group>
             <Button color="grey" inverted fluid style={{ opacity: 0.8 }}>
               进入系统

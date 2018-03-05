@@ -17,7 +17,7 @@ const store = createStore(
 );
 
 if (localStorage.cdejwt) {
-  const user = { username: localStorage.cdejwt };
+  const user = { realname: localStorage.cdejwt };
   store.dispatch(userLoggedIn(user));
 }
 

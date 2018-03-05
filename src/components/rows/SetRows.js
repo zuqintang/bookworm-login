@@ -44,31 +44,31 @@ function SetRows(props) {
           </Label>
           <List divided selection>
             <List.Item>
-              <Label color="blue" horizontal>
+              <Label color="teal" horizontal>
                 编码
               </Label>
               {row.DS_CODE}
             </List.Item>
             <List.Item>
-              <Label color="blue" horizontal>
+              <Label color="teal" horizontal>
                 来源
               </Label>
               {FormatStandard(row.STANDARD)}
             </List.Item>
             <List.Item>
-              <Label color="blue" horizontal>
+              <Label color="teal" horizontal>
                 所属学科
               </Label>
               {FormatStudy(row.STUDY_TYPE)}
             </List.Item>
             <List.Item>
-              <Label color="blue" horizontal>
+              <Label color="teal" horizontal>
                 创建日期
               </Label>
               {row.CREATED_AT}
             </List.Item>
             <List.Item>
-              <Label color="blue" horizontal>
+              <Label color="teal" horizontal>
                 创建人
               </Label>
               {row.CREATOR}

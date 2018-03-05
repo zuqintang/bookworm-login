@@ -80,7 +80,9 @@ class SetPageForm extends React.Component {
             value={data.query}
             onChange={this.handleInputChange}
           />
-          <Form.Button size="mini">检索</Form.Button>
+          <Form.Button primary size="mini">
+            检索
+          </Form.Button>
         </Form.Group>
       </Form>
     );
